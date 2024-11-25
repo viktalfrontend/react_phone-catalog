@@ -1,0 +1,13 @@
+import styles from './NotFoundPage.module.scss';
+import pageNotFound from '../../../public/img/page-not-found.png';
+
+export const NotFoundPage = () => (
+  <div className={styles['not-found-page']}>
+    <h1>Page not found</h1>
+    <img
+      className={styles['not-found-page__img']}
+      src={pageNotFound}
+      alt="page not found"
+    />
+  </div>
+);

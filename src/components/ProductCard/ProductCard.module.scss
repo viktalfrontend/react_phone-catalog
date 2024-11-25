@@ -1,0 +1,129 @@
+@import '../../vars.scss';
+@import'../../mixins.scss';
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 272px;
+  border: 1px solid #e2e6e9;
+  padding: 32px;
+  box-shadow: 0px 2px 16px 0px #0000001A;
+
+
+  &__photo {
+    display: block;
+    width: 208px;
+    height: 196px;
+    margin: 0 auto;
+    object-fit: contain;
+    @include hover(transform,scale(1.05));
+  }
+
+  &__title {
+    padding-top: 16px;
+    font-family: Mont;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: left;
+    color: $secondary-color;
+  }
+
+  &__prices {
+    display: flex;
+    gap: 8px;
+    width: 108px;
+    justify-content: space-between;
+    font-family: Mont;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 30.8px;
+    text-align: left;
+    color: $secondary-color ;
+  }
+
+  &__pricesFull {
+    color: $primary-color;
+    font-weight: 500;
+    text-decoration: line-through;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    margin: 8px 0 8px 0;
+
+    &::before {
+      position: absolute;
+      top: -8px;
+
+      content: '';
+      height: 1px;
+      background-color: #e2e6e9;
+      width: 100%;
+      z-index: 5;
+    }
+  }
+
+  &__infoItem {
+    display: flex;
+    justify-content: space-between;
+    font-family: Mont;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 15.34px;
+    text-align: left;
+  }
+
+  &__infoLable {
+    color: $primary-color;
+  }
+
+  &__infoValue {
+    color: $secondary-color;
+  }
+
+  &__buttonAdd {
+    border: none;
+    padding: 9px 39px;
+    font-family: Mont;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    text-align: center;
+    color: #fff;
+    background-color: $secondary-color;
+
+    &:hover {
+      box-shadow: 0px 3px 13px 0px #17203166;
+      cursor: pointer;
+    }
+
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__buttonFavorite {
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #b4bdc3;
+    background-color: #fff;
+    background-image: url(../../images/icon/favourites.svg);
+
+    &:hover {
+      border: 1px solid $secondary-color;
+      cursor: pointer;
+    }
+  }
+
+}
+
+
