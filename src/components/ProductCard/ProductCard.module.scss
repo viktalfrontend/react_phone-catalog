@@ -1,28 +1,36 @@
-@import '../../vars.scss';
-@import'../../mixins.scss';
+@import '../../vars';
+@import'../../mixins';
 
 .productCard {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 272px;
-  border: 1px solid #e2e6e9;
+  height: 440px;
+  border: 1px solid $border-color;
   padding: 32px;
-  box-shadow: 0px 2px 16px 0px #0000001A;
+  box-shadow: 0 2px 16px 0 #0000001A;
 
+  @include on-tablet {
+    height: 506px;
+  }
 
   &__photo {
     display: block;
-    width: 208px;
-    height: 196px;
+    // width: 223px;
+    height: 130px;
     margin: 0 auto;
     object-fit: contain;
+
+    @include on-tablet {
+      height: 196px;
+    }
+
     @include hover(transform,scale(1.05));
   }
 
   &__title {
     padding-top: 16px;
-    font-family: Mont;
+    height: 58px;
     font-size: 14px;
     font-weight: 600;
     line-height: 21px;
@@ -33,9 +41,6 @@
   &__prices {
     display: flex;
     gap: 8px;
-    width: 108px;
-    justify-content: space-between;
-    font-family: Mont;
     font-size: 22px;
     font-weight: 800;
     line-height: 30.8px;
@@ -54,15 +59,16 @@
     flex-direction: column;
     gap: 8px;
     position: relative;
-    margin: 8px 0 8px 0;
+    padding: 8px 0;
 
     &::before {
       position: absolute;
       top: -8px;
+      margin-bottom: 8px;
 
       content: '';
       height: 1px;
-      background-color: #e2e6e9;
+      background-color: $border-color;
       width: 100%;
       z-index: 5;
     }
@@ -71,7 +77,6 @@
   &__infoItem {
     display: flex;
     justify-content: space-between;
-    font-family: Mont;
     font-size: 12px;
     font-weight: 700;
     line-height: 15.34px;
@@ -86,10 +91,14 @@
     color: $secondary-color;
   }
 
+  &__buttons {
+    display: flex;
+    gap: 8px;
+  }
+
   &__buttonAdd {
     border: none;
-    padding: 9px 39px;
-    font-family: Mont;
+    flex-grow: 1;
     font-size: 14px;
     font-weight: 700;
     line-height: 21px;
@@ -98,16 +107,12 @@
     background-color: $secondary-color;
 
     &:hover {
-      box-shadow: 0px 3px 13px 0px #17203166;
+      box-shadow: 0 3px 13px 0 #17203166;
       cursor: pointer;
     }
-
   }
 
-  &__buttons {
-    display: flex;
-    gap: 8px;
-  }
+
 
   &__buttonFavorite {
     width: 40px;
@@ -116,14 +121,13 @@
     background-repeat: no-repeat;
     border: 1px solid #b4bdc3;
     background-color: #fff;
-    background-image: url(../../images/icon/favourites.svg);
+    background-image: url(../../images/icons/favourites.svg);
 
     &:hover {
       border: 1px solid $secondary-color;
       cursor: pointer;
     }
   }
-
 }
 
 

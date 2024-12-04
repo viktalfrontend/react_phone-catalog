@@ -1,5 +1,5 @@
-@import '../../vars.scss';
-@import '../../mixins.scss';
+@import '../../vars';
+@import '../../mixins';
 
 .header {
   position: sticky;
@@ -8,7 +8,7 @@
   background: #fff;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 1px 0px 0px #e2eeE9;
+  box-shadow: 0 1px 0 0 #e2eeE9;
 
   .logo__img {
     display: block;
@@ -16,7 +16,7 @@
     height: 22px;
     margin: 13px 16px;
 
-    @include onDesctop {
+    @include on-desctop {
       width: 80px;
       height: 28px;
       margin: 18px 24px
@@ -28,7 +28,7 @@
     align-items: center;
     gap: 16px;
 
-    @include onDesctop {
+    @include on-desctop {
       gap: 24px;
     }
   }
@@ -36,7 +36,7 @@
   .nav {
     display: none;
 
-    @include onTablet {
+    @include on-tablet {
       display: block;
     }
 
@@ -46,7 +46,7 @@
       gap: 32px;
       list-style: none;
 
-      @include onDesctop {
+      @include on-desctop {
         gap: 64px;
       }
     }
@@ -55,7 +55,7 @@
       height: 48px;
       line-height: 48px;
 
-      @include onDesctop {
+      @include on-desctop {
         height: 64px;
       }
     }
@@ -66,7 +66,6 @@
       padding: 18px 0;
       text-decoration: none;
       text-transform: uppercase;
-      font-family: Mont;
       font-size: 12px;
       font-weight: 800;
       line-height: 11px;
@@ -74,7 +73,7 @@
       text-align: left;
       color: $primary-color;
 
-      @include onDesctop {
+      @include on-desctop {
         padding: 26px 0;
       }
     }
@@ -101,34 +100,25 @@
   &__icons {
     display: flex;
 
-
     .icon {
       display: block;
       height: 48px;
       width: 48px;
       background-repeat: no-repeat;
       background-position: center;
-      box-shadow: -1px 0px 0px 0px #e2e6e9;
+      box-shadow: -1px 0 0 0 $border-color;
 
-      @include onDesctop {
+
+      @include on-desctop {
         width: 64px;
         height: 64px;
       }
 
-
-      &--menu {
-        background-image: url(../../images/icon/burger-menu.svg);
-
-        @include onTablet {
-          display: none;
-        }
-      }
-
       &--favourites {
         display: none;
-        background-image: url(../../images/icon/favourites.svg);
+        background-image: url(../../images/icons/favourites.svg);
 
-        @include onTablet {
+        @include on-tablet {
           display: block;
         }
 
@@ -136,12 +126,34 @@
 
       &--shoppingbag {
         display: none;
-        background-image: url(../../images/icon/shopping-bag.svg);
+        background-image: url(../../images/icons/shopping-bag.svg);
 
-        @include onTablet {
+        @include on-tablet {
           display: block;
         }
+      }
+    }
 
+    .buttons__menu {
+      width: 48px;
+      height: 48px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #fff;
+      box-shadow: -1px 0 0 0 $border-color;
+      border: none;
+      cursor: pointer;
+
+      @include on-tablet {
+        display: none;
+      }
+
+      &--burger {
+      background-image: url(../../images/icons/burger-menu.svg);
+      }
+
+      &--close {
+        background-image: url(../../images/icons/close-icon.svg);
       }
     }
   }

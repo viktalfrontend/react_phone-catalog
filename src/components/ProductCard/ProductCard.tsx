@@ -7,21 +7,21 @@ type Props = {
 };
 
 export const ProductCard: React.FC<Props> = ({
-  product: { name, priceRegular, priceDiscount, screen, capacity, ram, images },
+  product: { name, price, fullPrice, screen, capacity, ram, image },
 }) => (
   <div className={styles.productCard}>
-    <img className={styles.productCard__photo} src={images[0]} alt={name} />
+    <img className={styles.productCard__photo} src={image} alt={name} />
     <p className={styles.productCard__title}>{name}</p>
 
     <div className={styles.productCard__prices}>
-      <p className={styles.productCard__pricesCurrent}>{`$${priceDiscount}`}</p>
-      <p className={styles.productCard__pricesFull}>{`$${priceRegular}`}</p>
+      <p className={styles.productCard__pricesCurrent}>{`$${fullPrice}`}</p>
+      <p className={styles.productCard__pricesFull}>{`$${price}`}</p>
     </div>
 
     <div className={styles.productCard__info}>
       <div className={styles.productCard__infoItem}>
         <p className={styles.productCard__infoLable}>Screen</p>
-        <p className={styles.productCard__infoValue}>{screen.slice(0, 4)}</p>
+        <p className={styles.productCard__infoValue}>{screen}</p>
       </div>
 
       <div className={styles.productCard__infoItem}>

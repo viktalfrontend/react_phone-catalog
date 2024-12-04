@@ -1,21 +1,27 @@
-@import '../../vars.scss';
-@import '../../mixins.scss';
+@import '../../vars';
+@import '../../mixins';
 
 .category {
-  margin: 24px 32px 40px 32px;
+  @include contentPaddingInline;
 
   &__title {
-    margin: 40px 0 8px;
-    font-family: Mont;
-    font-size: 48px;
+    padding: 24px 0 8px;
+    text-transform: capitalize;
+    font-size: 32px;
     font-weight: 800;
-    line-height: 56px;
+    line-height: 41px;
     letter-spacing: -0.01em;
+    text-align: left;
     color: $secondary-color;
+
+    @include on-tablet {
+    font-size: 48px;
+    line-height: 56px;
+    }
   }
 
   &__quantity {
-    margin-bottom: 40px;
+    padding-bottom: 32px;
     font-size: 14px;
     font-weight: 600;
     line-height: 21px;
@@ -23,10 +29,11 @@
   }
 
   &__selects {
+    width: 287px;
     display: flex;
+    justify-content: space-between;
     gap: 16px;
     margin-bottom: 24px;
-
 
     .sort__title, .items-on-page__title {
       font-size: 12px;
@@ -36,7 +43,7 @@
     }
 
     .select__sort {
-      width: 176px;
+      width: 136px;
       height: 40px;
       border-color: $primary-color;
       color: $secondary-color;
@@ -44,29 +51,31 @@
       padding: 0 12px;
 
     }
+
     .select__items {
       width: 128px;
       height: 40px;
       border-color: $primary-color;
       outline: none;
       padding: 0 12px;
-
     }
   }
 
   &__content {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
-    gap: 16px;
+    justify-content: center;
+    gap: 40px 16px;
   }
 
   .category__navigation {
+    padding-top: 24px;
     display: flex;
     align-items: center;
     gap: 8px;
 
     &--home {
-      background-image: url(../../images/icon/home.svg);
+      background-image: url(../../images/icons/home.svg);
       content: '';
       width: 16px;
       height: 16px;
@@ -89,47 +98,5 @@
         height: 16px;
       }
     }
-
   }
 }
-
-
-
-// .breadcrumbs__icons {
-//   display: flex;
-//   align-items: center;
-//   gap: 8px;
-
-
-
-//   .breadcrumbs__icon {
-//     display: block;
-//     text-decoration: none;
-//     height: 16px;
-//     width: 16px;
-//     background-repeat: no-repeat;
-//     background-position: center;
-
-//     &--home {
-//       background-image: url(../../images/icon/home.svg);
-
-//     }
-
-//     &--category {
-
-//       font-size: 12px;
-//       font-weight: 600;
-//       line-height: 15.34px;
-//       color: $primary-color;
-
-//       &::before {
-//         display: block;
-//         background-image: url(../../images/arrows/arrow-right.svg);
-//         content: '';
-//         width: 16px;
-//         height: 16px;
-//       }
-
-//     }
-//   }
-// }
