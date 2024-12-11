@@ -1,0 +1,12 @@
+export declare const buttonAdd: string;
+export declare const buttonFavorite: string;
+export declare const buttons: string;
+export declare const info: string;
+export declare const infoItem: string;
+export declare const infoLable: string;
+export declare const infoValue: string;
+export declare const photo: string;
+export declare const prices: string;
+export declare const pricesFull: string;
+export declare const productCard: string;
+export declare const title: string;

@@ -1,7 +1,38 @@
-.productSlider {
-  display: flex;
-  gap: 16px;
-  // justify-content: center;
-  overflow: hidden;
+@import '../../mixins';
+@import '../../vars';
+
+
+.slider__title {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 30.8px;
+  text-align: left;
+  color: $secondary-color;
+
+  @include on-tablet {
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -0.01em;
+  }
 }
+
+
+  .slider__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 24px;
+  }
+
+
+  .container {
+    width: 212px;
+
+    @include on-tablet {
+      width: 237px;
+    }
+
+    @include on-desctop {
+      width: 272px;
+    }
+  }
 

@@ -2,101 +2,106 @@
 @import '../../mixins';
 
 .category {
-  @include contentPaddingInline;
+  @include  content-padding-inline;
+}
 
-  &__title {
-    padding: 24px 0 8px;
-    text-transform: capitalize;
-    font-size: 32px;
-    font-weight: 800;
-    line-height: 41px;
-    letter-spacing: -0.01em;
-    text-align: left;
-    color: $secondary-color;
+.title {
+  padding: 24px 0 8px;
+  text-transform: capitalize;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 41px;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: $secondary-color;
 
-    @include on-tablet {
-    font-size: 48px;
-    line-height: 56px;
-    }
+  @include on-tablet {
+  font-size: 48px;
+  line-height: 56px;
   }
+}
 
-  &__quantity {
-    padding-bottom: 32px;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 21px;
-    color: $primary-color;
+.quantity {
+  padding-bottom: 32px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  color: $primary-color;
+}
+
+.selects {
+  width: 287px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sortTitle {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 15.34px;
+  color: $primary-color;
+}
+
+.selectSort {
+  width: 136px;
+  height: 40px;
+  border-color: $primary-color;
+  color: $secondary-color;
+  outline: none;
+  padding: 0 12px;
+
+}
+
+.selectItems {
+  width: 128px;
+  height: 40px;
+  border-color: $primary-color;
+  outline: none;
+  padding: 0 12px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  justify-content: center;
+  gap: 40px 16px;
+  padding-bottom: 24px;
+
+  @include on-tablet {
+    padding-bottom: 40px;
   }
+}
 
-  &__selects {
-    width: 287px;
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 24px;
+.nav {
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-    .sort__title, .items-on-page__title {
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 15.34px;
-      color: $primary-color;
-    }
+.navHome {
+  background-image: url(../../images/icons/home.svg);
+  content: '';
+  width: 16px;
+  height: 16px;
+}
 
-    .select__sort {
-      width: 136px;
-      height: 40px;
-      border-color: $primary-color;
-      color: $secondary-color;
-      outline: none;
-      padding: 0 12px;
+.navCategory {
+  display: flex;
+  gap: 8px;
+  text-transform: capitalize;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15.34px;
+  color: $primary-color;
 
-    }
-
-    .select__items {
-      width: 128px;
-      height: 40px;
-      border-color: $primary-color;
-      outline: none;
-      padding: 0 12px;
-    }
-  }
-
-  &__content {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
-    justify-content: center;
-    gap: 40px 16px;
-  }
-
-  .category__navigation {
-    padding-top: 24px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    &--home {
-      background-image: url(../../images/icons/home.svg);
-      content: '';
-      width: 16px;
-      height: 16px;
-    }
-
-    &--category {
-      display: flex;
-      gap: 8px;
-      text-transform: capitalize;
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 15.34px;
-      color: $primary-color;
-
-      &::before {
-        display: block;
-        background-image: url(../../images/arrows/arrow-right.svg);
-        content: '';
-        width: 16px;
-        height: 16px;
-      }
-    }
+  &::before {
+    display: block;
+    background-image: url(../../images/arrows/arrow-right.svg);
+    content: '';
+    width: 16px;
+    height: 16px;
   }
 }

@@ -8,126 +8,123 @@
   height: 440px;
   border: 1px solid $border-color;
   padding: 32px;
-  box-shadow: 0 2px 16px 0 #0000001A;
+  box-shadow: 0 2px 16px 0 #0000001a;
 
   @include on-tablet {
     height: 506px;
   }
+}
 
-  &__photo {
-    display: block;
-    // width: 223px;
-    height: 130px;
-    margin: 0 auto;
-    object-fit: contain;
+.buttonFavorite {
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #b4bdc3;
+  background-color: #fff;
+  background-image: url(../../images/icons/favourites.svg);
 
-    @include on-tablet {
-      height: 196px;
-    }
-
-    @include hover(transform,scale(1.05));
-  }
-
-  &__title {
-    padding-top: 16px;
-    height: 58px;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 21px;
-    text-align: left;
-    color: $secondary-color;
-  }
-
-  &__prices {
-    display: flex;
-    gap: 8px;
-    font-size: 22px;
-    font-weight: 800;
-    line-height: 30.8px;
-    text-align: left;
-    color: $secondary-color ;
-  }
-
-  &__pricesFull {
-    color: $primary-color;
-    font-weight: 500;
-    text-decoration: line-through;
-  }
-
-  &__info {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: relative;
-    padding: 8px 0;
-
-    &::before {
-      position: absolute;
-      top: -8px;
-      margin-bottom: 8px;
-
-      content: '';
-      height: 1px;
-      background-color: $border-color;
-      width: 100%;
-      z-index: 5;
-    }
-  }
-
-  &__infoItem {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 15.34px;
-    text-align: left;
-  }
-
-  &__infoLable {
-    color: $primary-color;
-  }
-
-  &__infoValue {
-    color: $secondary-color;
-  }
-
-  &__buttons {
-    display: flex;
-    gap: 8px;
-  }
-
-  &__buttonAdd {
-    border: none;
-    flex-grow: 1;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 21px;
-    text-align: center;
-    color: #fff;
-    background-color: $secondary-color;
-
-    &:hover {
-      box-shadow: 0 3px 13px 0 #17203166;
-      cursor: pointer;
-    }
-  }
-
-
-
-  &__buttonFavorite {
-    width: 40px;
-    height: 40px;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: 1px solid #b4bdc3;
-    background-color: #fff;
-    background-image: url(../../images/icons/favourites.svg);
-
-    &:hover {
-      border: 1px solid $secondary-color;
-      cursor: pointer;
-    }
+  &:hover {
+    border: 1px solid $secondary-color;
+    cursor: pointer;
   }
 }
 
 
+.photo {
+  display: block;
+  height: 130px;
+  margin: 0 auto;
+  object-fit: contain;
+
+  @include on-tablet {
+    height: 196px;
+  }
+
+  @include hover(transform,scale(1.05));
+}
+
+.title {
+  padding-top: 16px;
+  height: 58px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-align: left;
+  color: $secondary-color;
+}
+
+.prices {
+  display: flex;
+  gap: 8px;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 30.8px;
+  text-align: left;
+  color: $secondary-color ;
+}
+
+.pricesFull {
+  color: $primary-color;
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  padding: 8px 0;
+
+  &::before {
+    position: absolute;
+    top: -8px;
+    margin-bottom: 8px;
+
+    content: '';
+    height: 1px;
+    background-color: $border-color;
+    width: 100%;
+    z-index: 5;
+  }
+}
+
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 15.34px;
+  text-align: left;
+}
+
+.infoLable {
+  color: $primary-color;
+}
+
+.infoValue {
+  color: $secondary-color;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.buttonAdd {
+  border: none;
+  flex-grow: 1;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: center;
+  color: #fff;
+  background-color: $secondary-color;
+
+}
+
+.buttonAdd:hover {
+  box-shadow: 0 3px 13px 0 #17203166;
+  cursor: pointer;
+}

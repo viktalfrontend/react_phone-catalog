@@ -2,123 +2,128 @@
 @import '../../mixins';
 
 .footer {
+  box-shadow: 0 -1px 0 0 $border-color;
+}
+
+.content {
   padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 32px;
-  box-shadow: 0 -1px 0 0 $border-color;
 
-  @include contentPaddingInline ;
-
-
+  @include  content-padding-inline ;
+  
   @include on-tablet {
     flex-direction: row;
     justify-content: space-between;
-  }
-
-  &__menu {
-    @include on-tablet {
-      width: 378px;
-      align-self: center;
-    }
-  }
-
-  .logo__img {
-    display: block;
-    width: 89px;
-    height: 32px;
-  }
-
-  .nav {
-
-    &__list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      list-style: none;
-
-      @include on-tablet {
-        flex-direction: row;
-        gap: 107px;
-      }
-    }
-
-    &__link {
-      display: block;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 12px;
-      font-weight: 800;
-      line-height: 11px;
-      letter-spacing: 0.04em;
-      text-align: left;
-      color: $primary-color;
-    }
-
-    &__link:hover {
-      color: $secondary-color;
-    }
-  }
-
-  &__button {
-    padding-left: 16px;
-    display: flex;
-    gap: 16px;
-    justify-content: center;
     align-items: center;
+  }
+}
 
-   .buttonname {
-    display: block;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 15.34px;
-    color: $primary-color;
-   }
-
-   .buttonarrow {
-    display: block;
-    height: 32px;
-    width: 32px;
-    text-decoration: none;
-    border: 1px solid #B4BDC3;
-    background-image: url(../../images/icons/arrow-to-top.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-
-    &:hover {
-      border: 1px solid #313237
-    }
-   }
+.nav {
+  @include on-tablet {
+    width: 198px;
+    align-self: center;
   }
 
-  .buttons {
-    display: flex;
-    align-items: center;
-    width: 100%;
+  @include on-desctop{
+    width: 378px;
+  }
+}
+
+.logoImg {
+  display: block;
+  width: 89px;
+  height: 32px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+
+  @include on-tablet {
+    flex-direction: row;
   }
 
-  .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border: none;
-    height: 64px;
-    width: 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-top: 1px solid $border-color;
-
-    &--favourites {
-      background-image: url(../../images/icons/favourites.svg);
-      border-right: 1px solid $border-color;
-
-    }
-
-    &--shoppingbag {
-      background-image: url(../../images/icons/shopping-bag.svg);
-      box-shadow: -1px 0 0 0 $border-color;
-    }
+  @include on-desctop {
+    gap: 107px;
   }
+}
+
+.link {
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 11px;
+  letter-spacing: 0.04em;
+  text-align: left;
+  color: $primary-color;
+}
+
+.link:hover {
+  color: $secondary-color;
+}
+
+.btnTop {
+  // padding-left: 16px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.btnName {
+  display: block;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 15.34px;
+  color: $primary-color;
+}
+
+.buttonArrow {
+  display: block;
+  height: 32px;
+  width: 32px;
+  text-decoration: none;
+  border: 1px solid #B4BDC3;
+  background-image: url(../../images/icons/arrow-to-top.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+// .buttons {
+//   display: flex;
+//   align-items: center;
+//   width: 100%;
+// }
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: none;
+  height: 64px;
+  width: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  // border-top: 1px solid $border-color;
+
+}
+
+.favourites {
+  background-image: url(../../images/icons/favourites.svg);
+  border-right: 1px solid $border-color;
+
+}
+
+.shoppingbag {
+  background-image: url(../../images/icons/shopping-bag.svg);
+  box-shadow: -1px 0 0 0 $border-color;
 }

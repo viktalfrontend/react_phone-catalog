@@ -10,7 +10,7 @@
   }
 }
 
-@mixin  contentPaddingInline {
+@mixin content-padding-inline {
   padding-inline: 16px;
 
   @include on-tablet {
@@ -22,7 +22,7 @@
   }
 
   @include on-desctop {
-    padding-inline: 0px ;
+    padding-inline: 0 ;
     max-width: 1136px;
     margin-inline: auto;
   }

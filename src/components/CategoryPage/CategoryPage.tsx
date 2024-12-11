@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import styles from './CategoryPage.module.scss';
-import { Product } from '../../types/Product';
-import { getProducts } from '../../services/fetch';
 import { ProductCard } from '../ProductCard';
 import { Category } from '../../types/Category';
 import { Loader } from '../Loader';
+import { ProductContext } from '../ProductContext/ProductContext';
 
 type Props = {
   category: Category;
 };
 
 export const CategoryPage: React.FC<Props> = ({ category }) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { products, isLoading } = useContext(ProductContext);
 
   const getTitle = (categoryName: Category) => {
     if (categoryName === Category.Phones) {
@@ -22,44 +20,33 @@ export const CategoryPage: React.FC<Props> = ({ category }) => {
     return categoryName;
   };
 
-  useEffect(() => {
-    setIsLoading(true);
-    getProducts(category)
-      .then(setProducts)
-      .catch()
-      .finally(() => setIsLoading(false));
-  }, [category]);
+  const productCaegory = products.filter(
+    product => product.category === category,
+  );
 
   return (
     <div className={styles.category}>
       {isLoading && <Loader />}
-      {!isLoading && products.length > 0 && (
+      {!isLoading && productCaegory.length > 0 && (
         <>
-          <nav className={styles.category__navigation}>
-            <a
-              href="#"
-              className={`${styles['category__navigation--home']}`}
-            ></a>
-            <span className={`${styles['category__navigation--category']}`}>
-              {category}
-            </span>
+          <nav className={styles.nav}>
+            <a href="#" className={styles.navHome}></a>
+            <span className={styles.navCategory}>{category}</span>
           </nav>
-          <h1 className={styles.category__title}>{getTitle(category)}</h1>
-          <p
-            className={styles.category__quantity}
-          >{`${products.length + 1} models`}</p>
-          <div className={styles.category__selects}>
-            <div className={styles.sort}>
-              <p className={styles.sort__title}>Sort by</p>
-              <select className={styles.select__sort}>
+          <h1 className={styles.title}>{getTitle(category)}</h1>
+          <p className={styles.quantity}>{`${productCaegory.length} models`}</p>
+          <div className={styles.selects}>
+            <div>
+              <p className={styles.sortTitle}>Sort by</p>
+              <select className={styles.selectSort}>
                 <option value="">Newest</option>
                 <option value="">Alphabetically</option>
                 <option value="">Cheapest</option>
               </select>
             </div>
-            <div className={styles['items-on-page']}>
-              <p className={styles['items-on-page__title']}>Items on page</p>
-              <select className={styles.select__items}>
+            <div>
+              <p className={styles.sortTitle}>Items on page</p>
+              <select className={styles.selectItems}>
                 <option value="">4</option>
                 <option value="">8</option>
                 <option value="">16</option>
@@ -67,8 +54,8 @@ export const CategoryPage: React.FC<Props> = ({ category }) => {
               </select>
             </div>
           </div>
-          <main className={styles.category__content}>
-            {products.map(product => (
+          <main className={styles.container}>
+            {productCaegory.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
           </main>

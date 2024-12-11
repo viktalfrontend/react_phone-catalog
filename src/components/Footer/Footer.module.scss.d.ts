@@ -1,0 +1,12 @@
+export declare const btnName: string;
+export declare const btnTop: string;
+export declare const buttonArrow: string;
+export declare const buttons: string;
+export declare const content: string;
+export declare const favourites: string;
+export declare const footer: string;
+export declare const link: string;
+export declare const list: string;
+export declare const logoImg: string;
+export declare const nav: string;
+export declare const shoppingbag: string;

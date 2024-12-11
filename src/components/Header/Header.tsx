@@ -1,74 +1,39 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../../images/logo/Logo.svg';
 import styles from './Header.module.scss';
-import classNames from 'classnames';
-import '../../vars.scss';
-import { useRef } from 'react';
+// import classNames from 'classnames';
 
-const getLinkClass = ({ isActive }: { isActive: boolean }) =>
-  classNames(styles.nav__link, { [styles['is-active']]: isActive });
+// import { useRef } from 'react';
+import { Navigation } from '../Navigation';
 
-type Props = {
-  isMenuOpen: boolean;
-  toggleMenu: () => void;
-};
-
-export const Header: React.FC<Props> = ({ isMenuOpen, toggleMenu }) => {
-  const buttonMenu = useRef<HTMLButtonElement>(null);
+export const Header: React.FC = () => {
+  // const buttonMenu = useRef<HTMLButtonElement>(null);
 
   return (
     <header className={styles.header}>
-      <div className={styles.header__content}>
-        <div className={styles.header__logo}>
-          <Link className={styles.header__link} to="/">
-            <img className={styles.logo__img} src={logo} alt="logo" />
-          </Link>
-        </div>
-
-        <div className={styles.header__navigation}>
-          <nav className={styles.nav}>
-            <ul className={styles.nav__list}>
-              <li className={styles.nav__item}>
-                <NavLink to="/" className={getLinkClass}>
-                  home
-                </NavLink>
-              </li>
-              <li className={styles.nav__item}>
-                <NavLink to="phones" className={getLinkClass}>
-                  phones
-                </NavLink>
-              </li>
-              <li className={styles.nav__item}>
-                <NavLink to="tablets" className={getLinkClass}>
-                  tablets
-                </NavLink>
-              </li>
-              <li className={styles.nav__item}>
-                <NavLink to="accessories" className={getLinkClass}>
-                  accessories
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </div>
+      <div className={styles.content}>
+        <Link to="/">
+          <img className={styles.logoImg} src={logo} alt="logo" />
+        </Link>
+        <Navigation />
       </div>
-      <div className={styles.header__icons}>
+      <div className={styles.icons}>
         <Link
           to="favourites"
-          className={`${styles.icon} ${styles['icon--favourites']}`}
+          className={`${styles.icon} ${styles.iconFavourites}`}
         ></Link>
         <Link
           to="shoppingbag"
-          className={`${styles.icon} ${styles['icon--shoppingbag']}`}
+          className={`${styles.icon} ${styles.iconShoppingbag}`}
         ></Link>
-        <button
-          className={classNames(styles.buttons__menu, {
-            [styles['buttons__menu--burger']]: !isMenuOpen,
-            [styles['buttons__menu--close']]: isMenuOpen,
+        {/* <button
+          className={classNames(styles.buttonsMenu, {
+            [styles.burger]: !isMenuOpen,
+            [styles.close]: isMenuOpen,
           })}
           onClick={toggleMenu}
           ref={buttonMenu}
-        ></button>
+        ></button> */}
       </div>
     </header>
   );

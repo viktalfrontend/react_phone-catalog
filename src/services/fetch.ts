@@ -1,8 +1,7 @@
-import { Category } from '../types/Category';
 import { Product } from '../types/Product';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const BASE_URL = 'http://localhost:5173/api/products.json';
+const URL = 'api/products.json';
 
 function get<T>(url: string): Promise<T> {
   return fetch(url).then(response => {
@@ -14,8 +13,8 @@ function get<T>(url: string): Promise<T> {
   });
 }
 
-export const getProducts = (category: Category): Promise<Product[]> => {
-  return get<Product[]>(BASE_URL).then(products => {
-    return products.filter(product => product.category === category);
+export const getProducts = (): Promise<Product[]> => {
+  return get<Product[]>(URL).then(products => {
+    return products;
   });
 };

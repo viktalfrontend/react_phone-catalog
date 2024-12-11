@@ -1,11 +1,7 @@
 import styles from './Footer.module.scss';
 import logo from '../../images/logo/Logo.svg';
 
-type Props = {
-  isMenuOpen: boolean;
-};
-
-export const Footer: React.FC<Props> = ({ isMenuOpen }) => {
+export const Footer: React.FC = () => {
   const handleScrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     window.scrollTo({
@@ -16,59 +12,50 @@ export const Footer: React.FC<Props> = ({ isMenuOpen }) => {
 
   return (
     <footer className={styles.footer}>
-      {isMenuOpen ? (
-        <div className={styles.buttons}>
-          <button
-            className={`${styles.button} ${styles['button--favourites']}`}
-          ></button>
-          <button
-            className={`${styles.button} ${styles['button--shoppingbag']}`}
-          ></button>
-        </div>
-      ) : (
-        <>
-          <div className={styles.footer__logo}>
-            <a className={styles.footer__link} href="#">
-              <img className={styles.logo__img} src={logo} alt="logo" />
-            </a>
-          </div>
+      {/* <div className={styles.buttons}>
+        <button className={`${styles.favourites}`}></button>
+        <button className={`${styles.shoppingbag}`}></button>
+      </div> */}
 
-          <div className={styles.footer__menu}>
-            <nav className={styles.nav}>
-              <ul className={styles.nav__list}>
-                <li className={styles.nav__item}>
-                  <a
-                    href="https://github.com/viktalfrontend"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.nav__link}
-                  >
-                    Github
-                  </a>
-                </li>
-                <li className={styles.nav__item}>
-                  <a href="#" className={styles.nav__link}>
-                    Contacts
-                  </a>
-                </li>
-                <li className={styles.nav__item}>
-                  <a href="#" className={styles.nav__link}>
-                    rights
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className={styles.footer__button}>
-            <span className={styles.buttonname}> Back to top</span>
-            <a
-              href="#top"
-              className={styles.buttonarrow}
-              onClick={handleScrollToTop}
-            ></a>
-          </div>
-        </>
-      )}
+      <div className={styles.content}>
+        <a href="#">
+          <img className={styles.logoImg} src={logo} alt="logo" />
+        </a>
+
+        <nav className={styles.nav}>
+          <ul className={styles.list}>
+            <li>
+              <a
+                href="https://github.com/viktalfrontend"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.link}
+              >
+                Github
+              </a>
+            </li>
+            <li>
+              <a href="#" className={styles.link}>
+                Contacts
+              </a>
+            </li>
+            <li>
+              <a href="#" className={styles.link}>
+                rights
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div className={styles.btnTop}>
+          <span className={styles.btnName}> Back to top</span>
+          <a
+            href="#top"
+            className={styles.buttonArrow}
+            onClick={handleScrollToTop}
+          ></a>
+        </div>
+      </div>
     </footer>
   );
 };

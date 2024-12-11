@@ -1,7 +1,7 @@
-@import '../../vars.scss';
-@import '../../mixins.scss';
+@import '../../vars';
+@import '../../mixins';
 
-.page__menu {
+.menu {
   height: 100vh;
   min-width: 320px;
   max-width: 639px;

@@ -1,0 +1,32 @@
+@import '../../mixins';
+@import '../../vars';
+
+.buttons {
+  display: flex;
+  gap: 16px;
+
+}
+
+.button {
+  background-color: #fff;
+  border: 1px solid $border-color;
+  color: $secondary-color;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+
+.prev {
+  background-image: url(../../images/arrows/arrow-left.svg);
+}
+
+.next {
+  background-image: url(../../images/arrows/arrow-right.svg);
+}
+
+// .slider__button--disabled {
+//   opacity: 0.5;
+//   pointer-events: none; // Вимикає кліки
+// }

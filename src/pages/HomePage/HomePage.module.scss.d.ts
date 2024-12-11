@@ -1,0 +1,14 @@
+export declare const button: string;
+export declare const container: string;
+export declare const content: string;
+export declare const hpTitle: string;
+export declare const img: string;
+export declare const large: string;
+export declare const link: string;
+export declare const next: string;
+export declare const pictureSlider: string;
+export declare const prev: string;
+export declare const quantity: string;
+export declare const sectionTitle: string;
+export declare const title: string;
+export declare const wrapp: string;

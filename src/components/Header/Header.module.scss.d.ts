@@ -1,0 +1,10 @@
+export declare const burger: string;
+export declare const buttonsMenu: string;
+export declare const close: string;
+export declare const content: string;
+export declare const header: string;
+export declare const icon: string;
+export declare const iconFavourites: string;
+export declare const icons: string;
+export declare const iconShoppingbag: string;
+export declare const logoImg: string;

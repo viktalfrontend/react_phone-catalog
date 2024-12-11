@@ -6,17 +6,20 @@ import { Tablets } from './pages/Tablets/Tablets';
 import { Accessories } from './pages/Accessories';
 import { App } from './App';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { ProductProvider } from './components/ProductContext/ProductContext';
 
 export const Root = () => (
   <HashRouter>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route index element={<HomePage />} />
-        <Route path="phones" element={<Phones />} />
-        <Route path="tablets" element={<Tablets />} />
-        <Route path="accessories" element={<Accessories />} />
-      </Route>
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+    <ProductProvider>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<HomePage />} />
+          <Route path="phones" element={<Phones />} />
+          <Route path="tablets" element={<Tablets />} />
+          <Route path="accessories" element={<Accessories />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </ProductProvider>
   </HashRouter>
 );
