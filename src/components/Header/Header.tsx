@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo/Logo.svg';
 import styles from './Header.module.scss';
-// import classNames from 'classnames';
-
-// import { useRef } from 'react';
 import { Navigation } from '../Navigation';
+import classNames from 'classnames';
 
-export const Header: React.FC = () => {
-  // const buttonMenu = useRef<HTMLButtonElement>(null);
+type Props = {
+  isMenuOpen: boolean;
+  onBurgerClick: () => void;
+};
 
+export const Header: React.FC<Props> = ({ onBurgerClick, isMenuOpen }) => {
   return (
     <header className={styles.header}>
       <div className={styles.content}>
@@ -26,14 +27,13 @@ export const Header: React.FC = () => {
           to="shoppingbag"
           className={`${styles.icon} ${styles.iconShoppingbag}`}
         ></Link>
-        {/* <button
+        <button
           className={classNames(styles.buttonsMenu, {
             [styles.burger]: !isMenuOpen,
             [styles.close]: isMenuOpen,
           })}
-          onClick={toggleMenu}
-          ref={buttonMenu}
-        ></button> */}
+          onClick={onBurgerClick}
+        ></button>
       </div>
     </header>
   );

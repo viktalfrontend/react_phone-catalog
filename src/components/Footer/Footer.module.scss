@@ -12,7 +12,7 @@
   gap: 32px;
 
   @include  content-padding-inline ;
-  
+
   @include on-tablet {
     flex-direction: row;
     justify-content: space-between;
@@ -113,8 +113,6 @@
   width: 50%;
   background-repeat: no-repeat;
   background-position: center;
-  // border-top: 1px solid $border-color;
-
 }
 
 .favourites {

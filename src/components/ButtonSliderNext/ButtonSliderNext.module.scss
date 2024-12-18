@@ -1,15 +1,9 @@
 @import '../../mixins';
 @import '../../vars';
 
-.buttons {
-  display: flex;
-  gap: 16px;
-
-}
-
 .button {
   background-color: #fff;
-  border: 1px solid $border-color;
+  border: 1px solid $button-color;
   color: $secondary-color;
   background-repeat: no-repeat;
   background-position: center;
@@ -18,15 +12,21 @@
   cursor: pointer;
 }
 
-.prev {
-  background-image: url(../../images/arrows/arrow-left.svg);
-}
-
 .next {
   background-image: url(../../images/arrows/arrow-right.svg);
 }
 
-// .slider__button--disabled {
-//   opacity: 0.5;
-//   pointer-events: none; // Вимикає кліки
-// }
+.disabled {
+  opacity: 0.5;
+  pointer-events: none; /* Забороняє кліки на неактивні кнопки */
+}
+
+.large {
+  display: none;
+
+  @include on-tablet {
+    display: block;
+    height: auto;
+    padding: 0 16px;
+  }
+}

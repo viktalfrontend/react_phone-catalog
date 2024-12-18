@@ -2,9 +2,6 @@ import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import styles from './Navigation.module.scss';
 
-const getLinkClass = ({ isActive }: { isActive: boolean }) =>
-  classNames(styles.link, { [styles.isActive]: isActive });
-
 type Props = {
   isVertical?: boolean;
 };
@@ -21,23 +18,71 @@ export const Navigation: React.FC<Props> = ({ isVertical = false }) => {
           [styles.listVertical]: isVertical,
         })}
       >
-        <li className={styles.item}>
-          <NavLink to="/" className={getLinkClass}>
+        <li
+          className={classNames(styles.item, {
+            [styles.itemVertical]: isVertical,
+          })}
+        >
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              classNames(styles.link, {
+                [styles.isActive]: isActive,
+                [styles.linkVertical]: isVertical,
+              })
+            }
+          >
             home
           </NavLink>
         </li>
-        <li className={styles.item}>
-          <NavLink to="phones" className={getLinkClass}>
+        <li
+          className={classNames(styles.item, {
+            [styles.itemVertical]: isVertical,
+          })}
+        >
+          <NavLink
+            to="phones"
+            className={({ isActive }) =>
+              classNames(styles.link, {
+                [styles.isActive]: isActive,
+                [styles.linkVertical]: isVertical,
+              })
+            }
+          >
             phones
           </NavLink>
         </li>
-        <li className={styles.item}>
-          <NavLink to="tablets" className={getLinkClass}>
+        <li
+          className={classNames(styles.item, {
+            [styles.itemVertical]: isVertical,
+          })}
+        >
+          <NavLink
+            to="tablets"
+            className={({ isActive }) =>
+              classNames(styles.link, {
+                [styles.isActive]: isActive,
+                [styles.linkVertical]: isVertical,
+              })
+            }
+          >
             tablets
           </NavLink>
         </li>
-        <li className={styles.item}>
-          <NavLink to="accessories" className={getLinkClass}>
+        <li
+          className={classNames(styles.item, {
+            [styles.itemVertical]: isVertical,
+          })}
+        >
+          <NavLink
+            to="accessories"
+            className={({ isActive }) =>
+              classNames(styles.link, {
+                [styles.isActive]: isActive,
+                [styles.linkVertical]: isVertical,
+              })
+            }
+          >
             accessories
           </NavLink>
         </li>

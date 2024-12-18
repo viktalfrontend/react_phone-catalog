@@ -7,10 +7,8 @@ import { PicturesSlider } from '../../components/PicturesSlider';
 import { Link } from 'react-router-dom';
 import { getHotPrices } from '../../services/getSortFunction';
 import { getNewestModels } from '../../services/getSortFunction';
-
 import { useContext } from 'react';
 
-import { Category } from '../../types/Category';
 import { ProductsSlider } from '../../components/ProductsSlider';
 import { Loader } from '../../components/Loader';
 import { ProductContext } from '../../components/ProductContext/ProductContext';
@@ -18,46 +16,29 @@ import { ProductContext } from '../../components/ProductContext/ProductContext';
 const sliderTitle = [' Brand new models', ' Hot prices'];
 
 export const HomePage = () => {
-  const { products, isLoading } = useContext(ProductContext);
-
-  const phones = products.filter(
-    product => product.category === Category.Phones,
-  );
-  const tablets = products.filter(
-    product => product.category === Category.Tablets,
-  );
-  const accessories = products.filter(
-    product => product.category === Category.Accessories,
-  );
+  const { phones, tablets, accessories, isLoading } =
+    useContext(ProductContext);
 
   const hotPrices = getHotPrices(phones);
   const newModels = getNewestModels(phones);
 
   return (
-    <div className={styles.container}>
+    <>
       {isLoading && <Loader />}
 
       {!isLoading && phones.length > 0 && (
         <div>
           <h1 className={styles.hpTitle}>Welcome to Nice Gadgets store!</h1>
           <div className={styles.content}>
-            <section>
-              <div className={styles.pictureSlider}>
-                <button
-                  className={`${styles.button} ${styles.prev} ${styles.large}`}
-                ></button>
-                <PicturesSlider />
-                <button
-                  className={`${styles.button} ${styles.next} ${styles.large}`}
-                ></button>
-              </div>
+            <section className={styles.section}>
+              <PicturesSlider />
             </section>
 
-            <section>
+            <section className={styles.section}>
               <ProductsSlider products={newModels} title={sliderTitle[0]} />
             </section>
 
-            <section>
+            <section className={styles.section}>
               <h2 className={styles.sectionTitle}>Shop by category</h2>
               <div className={styles.wrapp}>
                 <Link to="phones" className={styles.link}>
@@ -102,12 +83,12 @@ export const HomePage = () => {
               </div>
             </section>
 
-            <section>
+            <section className={styles.section}>
               <ProductsSlider products={hotPrices} title={sliderTitle[1]} />
             </section>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };

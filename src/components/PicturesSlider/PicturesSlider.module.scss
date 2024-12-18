@@ -1,25 +1,99 @@
 @import '../../mixins';
 @import '../../vars';
 
+.pictureSlider {
+  display: flex;
+  gap: 19px;
+
+  @include on-desctop {
+    gap: 16px;
+  }
+}
+
 .sliderImg {
   display: block;
   width: 100%;
-  height: 320px;
+  aspect-ratio: 1 / 1;
   margin: 0 auto;
   object-fit: cover;
-  object-position: right;
+  background-color: #000;
 
   @include on-tablet {
     height: 189px;
+    // width: 490px;
   }
 
   @include on-desctop {
     height: 400px;
+    // width: 1040px;
   }
 
-  // width: 1040px;
-  // height: 400px;
-  // object-fit: cover;
-  // background-color: #000;
 }
 
+
+// .button {
+//   background-color: #fff;
+//   border: 1px solid $button-color;
+//   color: $secondary-color;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   height: 32px;
+//   padding: 0 16px;
+//   cursor: pointer;
+// }
+
+// .prev {
+//   background-image: url(../../images/arrows/arrow-left.svg);
+// }
+
+// .next {
+//   background-image: url(../../images/arrows/arrow-right.svg);
+// }
+
+// .large {
+//   display: none;
+
+//   @include on-tablet {
+//     display: block;
+//     height: auto;
+//   }
+// }
+
+// .disabled {
+//   opacity: 0.5;
+//   pointer-events: none; /* Забороняє кліки на неактивні кнопки */
+// }
+
+.dots {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.content {
+  display: flex;
+  height: 24px;
+  width: 80px;
+  gap: 4px;
+}
+
+.dot {
+  height: 4px;
+  width: 14px;
+  margin: 10px 5px;
+  background-color: $border-color;
+  border-radius: 5px;
+}
+
+.dot:hover {
+  cursor: pointer;
+}
+
+.activeDot {
+  background-color: $secondary-color;
+}
+
+.content {
+  padding-top: 8px;
+  margin: 0 auto;
+}

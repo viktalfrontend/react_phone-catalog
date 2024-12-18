@@ -38,6 +38,10 @@
   }
 }
 
+.itemVertical {
+  height: 27px;
+}
+
 .link {
   position: relative;
   display: block;
@@ -54,6 +58,10 @@
   @include on-desctop {
     padding: 26px 0;
   }
+}
+
+.linkVertical {
+  padding: 8px 0;
 }
 
 .link.isActive {

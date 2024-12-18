@@ -4,13 +4,15 @@ import { ProductCard } from '../ProductCard';
 import { Category } from '../../types/Category';
 import { Loader } from '../Loader';
 import { ProductContext } from '../ProductContext/ProductContext';
+import { Product } from '../../types/Product';
 
 type Props = {
   category: Category;
 };
 
 export const CategoryPage: React.FC<Props> = ({ category }) => {
-  const { products, isLoading } = useContext(ProductContext);
+  const { phones, tablets, accessories, isLoading } =
+    useContext(ProductContext);
 
   const getTitle = (categoryName: Category) => {
     if (categoryName === Category.Phones) {
@@ -20,21 +22,35 @@ export const CategoryPage: React.FC<Props> = ({ category }) => {
     return categoryName;
   };
 
-  const productCaegory = products.filter(
-    product => product.category === category,
-  );
+  let productCategory: Product[] = [];
+
+  switch (category) {
+    case Category.Phones:
+      productCategory = phones;
+      break;
+    case Category.Tablets:
+      productCategory = tablets;
+      break;
+    case Category.Accessories:
+      productCategory = accessories;
+      break;
+    default:
+      break;
+  }
 
   return (
     <div className={styles.category}>
       {isLoading && <Loader />}
-      {!isLoading && productCaegory.length > 0 && (
+      {!isLoading && productCategory.length > 0 && (
         <>
           <nav className={styles.nav}>
             <a href="#" className={styles.navHome}></a>
             <span className={styles.navCategory}>{category}</span>
           </nav>
           <h1 className={styles.title}>{getTitle(category)}</h1>
-          <p className={styles.quantity}>{`${productCaegory.length} models`}</p>
+          <p
+            className={styles.quantity}
+          >{`${productCategory.length} models`}</p>
           <div className={styles.selects}>
             <div>
               <p className={styles.sortTitle}>Sort by</p>
@@ -55,7 +71,7 @@ export const CategoryPage: React.FC<Props> = ({ category }) => {
             </div>
           </div>
           <main className={styles.container}>
-            {productCaegory.map(product => (
+            {productCategory.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
           </main>

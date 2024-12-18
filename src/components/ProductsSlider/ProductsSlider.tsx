@@ -1,11 +1,13 @@
 import 'swiper/scss';
-import 'swiper/scss/navigation';
-import 'swiper/scss/pagination';
 import styles from './ProductsSlider.module.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide, Swiper } from 'swiper/react';
 import { ProductCard } from '../ProductCard';
 import { Product } from '../../types/Product';
-import { SliderButtons } from '../SliderButtons/SliderButtons';
+import { useRef, useState } from 'react';
+import { Swiper as SwiperCore } from 'swiper';
+
+import { ButtonSliderPrev } from '../ButtonSliderPrev';
+import { ButtonSliderNext } from '../ButtonSliderNext/ButtonSliderNext';
 
 type Props = {
   products: Product[];
@@ -13,6 +15,15 @@ type Props = {
 };
 
 export const ProductsSlider: React.FC<Props> = ({ products, title }) => {
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
+  const swiperRef = useRef<SwiperCore | null>(null);
+
+  const handleSlideChange = (swiper: SwiperCore) => {
+    setIsAtStart(swiper.isBeginning);
+    setIsAtEnd(swiper.isEnd);
+  };
+
   return (
     <Swiper
       spaceBetween={16}
@@ -21,10 +32,17 @@ export const ProductsSlider: React.FC<Props> = ({ products, title }) => {
         640: { slidesPerView: 2.5 },
         1200: { slidesPerView: 4 },
       }}
+      onSwiper={(swiper: SwiperCore | null) => {
+        swiperRef.current = swiper; // Зберігаємо інстанцію Swiper
+      }}
+      onSlideChange={handleSlideChange}
     >
-      <span className={styles.slider__buttons} slot="container-start">
-        <h2 className={styles.slider__title}>{title}</h2>
-        <SliderButtons />
+      <span className={styles.sliderButtons} slot="container-start">
+        <h2 className={styles.sliderTtitle}>{title}</h2>
+        <div className={styles.buttons}>
+          <ButtonSliderPrev isBeginning={isAtStart} swiperRef={swiperRef} />
+          <ButtonSliderNext isEnd={isAtEnd} swiperRef={swiperRef} />
+        </div>
       </span>
       {products.map((product: Product) => (
         <SwiperSlide key={product.id}>

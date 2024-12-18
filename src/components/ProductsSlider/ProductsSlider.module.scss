@@ -2,7 +2,7 @@
 @import '../../vars';
 
 
-.slider__title {
+.sliderTtitle {
   font-size: 22px;
   font-weight: 800;
   line-height: 30.8px;
@@ -17,22 +17,27 @@
 }
 
 
-  .slider__buttons {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 24px;
+.sliderButtons {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 24px;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+
+}
+
+
+.container {
+  width: 212px;
+
+  @include on-tablet {
+    width: 237px;
   }
 
-
-  .container {
-    width: 212px;
-
-    @include on-tablet {
-      width: 237px;
-    }
-
-    @include on-desctop {
-      width: 272px;
-    }
+  @include on-desctop {
+    width: 272px;
   }
-
+}

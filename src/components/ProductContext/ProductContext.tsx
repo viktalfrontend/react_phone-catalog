@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Product } from '../../types/Product';
 import { getProducts } from '../../services/fetch';
+import { Category } from '../../types/Category';
 
 interface ProductsContextType {
-  products: Product[];
+  phones: Product[];
+  tablets: Product[];
+  accessories: Product[];
   isLoading: boolean;
 }
 
 export const ProductContext = React.createContext<ProductsContextType>({
-  products: [],
+  phones: [],
+  tablets: [],
+  accessories: [],
   isLoading: false,
 });
 
@@ -28,9 +33,27 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const phones = products.filter(
+    product => product.category === Category.Phones,
+  );
+  const tablets = products.filter(
+    product => product.category === Category.Tablets,
+  );
+  const accessories = products.filter(
+    product => product.category === Category.Accessories,
+  );
+
+  const value = useMemo(
+    () => ({
+      phones,
+      tablets,
+      accessories,
+      isLoading,
+    }),
+    [phones, tablets, accessories, isLoading],
+  );
+
   return (
-    <ProductContext.Provider value={{ products, isLoading }}>
-      {children}
-    </ProductContext.Provider>
+    <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
   );
 };
