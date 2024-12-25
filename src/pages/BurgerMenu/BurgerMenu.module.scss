@@ -5,11 +5,14 @@
   position: fixed;
   top: 0;
   right: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding-top: 80px;
-  transform: translateX(100%);
-  transition: all 0.8s ease-in-out;
+  background-color: #fff;
+  transform: translateX(-100%);
+  transition: all 0.5s ease-in-out;
+  z-index: 10;
 
   @include on-tablet {
     display: none;
@@ -18,4 +21,41 @@
 
 .menuOpen {
   transform: translateX(0);
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.icons {
+  display: block;
+  height: 64px;
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  border-top: 1px solid $border-color;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+
+.icons:hover {
+  border:  1px solid $secondary-color;
+  cursor: pointer;
+}
+
+.favourites {
+  border-right: 1px solid $border-color;
+  background-image: url(../../images/icons/favourites.svg);
+}
+
+.shoppingbag {
+  background-image: url(../../images/icons/shopping-bag.svg);
+
 }

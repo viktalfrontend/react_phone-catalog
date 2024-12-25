@@ -69,7 +69,6 @@
 }
 
 .btnTop {
-  // padding-left: 16px;
   display: flex;
   gap: 16px;
   justify-content: center;
@@ -91,37 +90,8 @@
   height: 32px;
   width: 32px;
   text-decoration: none;
-  border: 1px solid #B4BDC3;
+  border: 1px solid #b4bdc3;
   background-image: url(../../images/icons/arrow-to-top.svg);
   background-repeat: no-repeat;
   background-position: center;
-}
-
-// .buttons {
-//   display: flex;
-//   align-items: center;
-//   width: 100%;
-// }
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  border: none;
-  height: 64px;
-  width: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.favourites {
-  background-image: url(../../images/icons/favourites.svg);
-  border-right: 1px solid $border-color;
-
-}
-
-.shoppingbag {
-  background-image: url(../../images/icons/shopping-bag.svg);
-  box-shadow: -1px 0 0 0 $border-color;
 }

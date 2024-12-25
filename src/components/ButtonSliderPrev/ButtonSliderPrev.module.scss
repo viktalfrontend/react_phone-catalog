@@ -9,6 +9,10 @@
   background-position: center;
   height: 32px;
   width: 32px;
+}
+
+.button:hover {
+  border:  1px solid $secondary-color;
   cursor: pointer;
 }
 
@@ -28,5 +32,5 @@
 
 .disabled {
   opacity: 0.5;
-  pointer-events: none; /* Забороняє кліки на неактивні кнопки */
+  pointer-events: none;
 }

@@ -20,49 +20,12 @@
 
   @include on-tablet {
     height: 189px;
-    // width: 490px;
   }
 
   @include on-desctop {
     height: 400px;
-    // width: 1040px;
   }
-
 }
-
-
-// .button {
-//   background-color: #fff;
-//   border: 1px solid $button-color;
-//   color: $secondary-color;
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   height: 32px;
-//   padding: 0 16px;
-//   cursor: pointer;
-// }
-
-// .prev {
-//   background-image: url(../../images/arrows/arrow-left.svg);
-// }
-
-// .next {
-//   background-image: url(../../images/arrows/arrow-right.svg);
-// }
-
-// .large {
-//   display: none;
-
-//   @include on-tablet {
-//     display: block;
-//     height: auto;
-//   }
-// }
-
-// .disabled {
-//   opacity: 0.5;
-//   pointer-events: none; /* Забороняє кліки на неактивні кнопки */
-// }
 
 .dots {
   display: flex;
@@ -75,6 +38,8 @@
   height: 24px;
   width: 80px;
   gap: 4px;
+  padding-top: 8px;
+  margin: 0 auto;
 }
 
 .dot {
@@ -91,9 +56,4 @@
 
 .activeDot {
   background-color: $secondary-color;
-}
-
-.content {
-  padding-top: 8px;
-  margin: 0 auto;
 }

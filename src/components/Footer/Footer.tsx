@@ -12,11 +12,6 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className={styles.footer}>
-      {/* <div className={styles.buttons}>
-        <button className={`${styles.favourites}`}></button>
-        <button className={`${styles.shoppingbag}`}></button>
-      </div> */}
-
       <div className={styles.content}>
         <a href="#">
           <img className={styles.logoImg} src={logo} alt="logo" />

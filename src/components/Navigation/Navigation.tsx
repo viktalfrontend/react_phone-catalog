@@ -4,9 +4,13 @@ import styles from './Navigation.module.scss';
 
 type Props = {
   isVertical?: boolean;
+  onLinkClick?: () => void;
 };
 
-export const Navigation: React.FC<Props> = ({ isVertical = false }) => {
+export const Navigation: React.FC<Props> = ({
+  isVertical = false,
+  onLinkClick,
+}) => {
   return (
     <nav
       className={classNames(styles.nav, {
@@ -25,6 +29,7 @@ export const Navigation: React.FC<Props> = ({ isVertical = false }) => {
         >
           <NavLink
             to="/"
+            onClick={onLinkClick}
             className={({ isActive }) =>
               classNames(styles.link, {
                 [styles.isActive]: isActive,
@@ -42,6 +47,7 @@ export const Navigation: React.FC<Props> = ({ isVertical = false }) => {
         >
           <NavLink
             to="phones"
+            onClick={onLinkClick}
             className={({ isActive }) =>
               classNames(styles.link, {
                 [styles.isActive]: isActive,
@@ -59,6 +65,7 @@ export const Navigation: React.FC<Props> = ({ isVertical = false }) => {
         >
           <NavLink
             to="tablets"
+            onClick={onLinkClick}
             className={({ isActive }) =>
               classNames(styles.link, {
                 [styles.isActive]: isActive,
@@ -76,6 +83,7 @@ export const Navigation: React.FC<Props> = ({ isVertical = false }) => {
         >
           <NavLink
             to="accessories"
+            onClick={onLinkClick}
             className={({ isActive }) =>
               classNames(styles.link, {
                 [styles.isActive]: isActive,

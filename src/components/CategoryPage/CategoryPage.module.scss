@@ -16,8 +16,8 @@
   color: $secondary-color;
 
   @include on-tablet {
-  font-size: 48px;
-  line-height: 56px;
+    font-size: 48px;
+    line-height: 56px;
   }
 }
 
@@ -37,29 +37,34 @@
   margin-bottom: 24px;
 }
 
+.selectSortBy {
+  height: 40px;
+  width: 136px;
+
+  @include on-tablet {
+    width: 187px;
+  }
+
+  @include on-desctop {
+    width: 176px;
+  }
+}
+
+.selectItemOnPage {
+  height: 40px;
+  width: 136px;
+
+  @include on-desctop {
+    width: 128px;
+  }
+}
+
 .sortTitle {
   font-size: 12px;
   font-weight: 700;
   line-height: 15.34px;
   color: $primary-color;
-}
-
-.selectSort {
-  width: 136px;
-  height: 40px;
-  border-color: $primary-color;
-  color: $secondary-color;
-  outline: none;
-  padding: 0 12px;
-
-}
-
-.selectItems {
-  width: 128px;
-  height: 40px;
-  border-color: $primary-color;
-  outline: none;
-  padding: 0 12px;
+  padding-bottom: 4px;
 }
 
 .container {
