@@ -95,3 +95,7 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.buttonArrow:hover {
+  border: 1px solid $secondary-color;
+}

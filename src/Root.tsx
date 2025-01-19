@@ -1,12 +1,11 @@
 import { HashRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
-import { Phones } from './pages/Phones/Phones';
-import { Tablets } from './pages/Tablets/Tablets';
-import { Accessories } from './pages/Accessories';
 import { App } from './App';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ProductProvider } from './components/ProductContext/ProductContext';
+import { CategoryPage } from './components/CategoryPage/CategoryPage';
+import { Category } from './types/Category';
 
 export const Root = () => (
   <HashRouter>
@@ -14,9 +13,18 @@ export const Root = () => (
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path="phones" element={<Phones />} />
-          <Route path="tablets" element={<Tablets />} />
-          <Route path="accessories" element={<Accessories />} />
+          <Route
+            path="phones"
+            element={<CategoryPage category={Category.Phones} />}
+          />
+          <Route
+            path="tablets"
+            element={<CategoryPage category={Category.Tablets} />}
+          />
+          <Route
+            path="accessories"
+            element={<CategoryPage category={Category.Accessories} />}
+          />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

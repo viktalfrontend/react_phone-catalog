@@ -27,6 +27,7 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     setIsLoading(true);
+
     getProducts()
       .then(setProducts)
       .catch()

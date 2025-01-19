@@ -9,3 +9,18 @@ export const getHotPrices = (phones: Product[]) => {
     .sort((a, b) => b.fullPrice - b.price - (a.fullPrice - a.price))
     .slice(0, 10);
 };
+
+export const sortProducts = (products: Product[], sortBy: string) => {
+  const productsCopy = [...products];
+
+  switch (sortBy) {
+    case 'age':
+      return productsCopy.sort((a, b) => a.year - b.year);
+    case 'name':
+      return productsCopy.sort((a, b) => a.name.localeCompare(b.name));
+    case 'price':
+      return productsCopy.sort((a, b) => a.price - b.price);
+    default:
+      return productsCopy;
+  }
+};

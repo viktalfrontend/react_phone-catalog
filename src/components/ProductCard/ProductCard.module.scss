@@ -37,11 +37,11 @@
   margin: 0 auto;
   object-fit: contain;
 
+ @include hover(transform,scale(1.05));
+
   @include on-tablet {
     height: 196px;
-  }
-
-  @include hover(transform,scale(1.05));
+  };
 }
 
 .title {

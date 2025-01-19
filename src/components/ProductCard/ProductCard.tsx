@@ -14,8 +14,8 @@ export const ProductCard: React.FC<Props> = ({
     <p className={styles.title}>{name}</p>
 
     <div className={styles.prices}>
-      <p>{`$${fullPrice}`}</p>
-      <p className={styles.pricesFull}>{`$${price}`}</p>
+      <p>{`$${price}`}</p>
+      <p className={styles.pricesFull}>{`$${fullPrice}`}</p>
     </div>
 
     <div className={styles.info}>

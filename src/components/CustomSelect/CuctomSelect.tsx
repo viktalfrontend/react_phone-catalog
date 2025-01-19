@@ -4,6 +4,7 @@ import Select, { SingleValue, StylesConfig } from 'react-select';
 type SelectOption = {
   value: string;
   label: string;
+  param: string;
 };
 
 const customStyles: StylesConfig<SelectOption, false> = {
@@ -69,6 +70,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
       styles={customStyles}
       value={value}
       onChange={onChange}
+      isSearchable={false}
     />
   );
 };

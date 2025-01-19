@@ -1,5 +1,7 @@
-import React, { useContext, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
 import styles from './CategoryPage.module.scss';
+import { sortProducts } from '../../services/getSortFunction';
 import { ProductCard } from '../ProductCard';
 import { Category } from '../../types/Category';
 import { Loader } from '../Loader';
@@ -7,23 +9,32 @@ import { ProductContext } from '../ProductContext/ProductContext';
 import { Product } from '../../types/Product';
 import { CustomSelect } from '../CustomSelect/CuctomSelect';
 import { SingleValue } from 'react-select';
+import { Pagination } from '../Pagination/Pagination';
 
 type SelectOption = {
   value: string;
   label: string;
+  param: string;
 };
 
-const optionsSortBy = [
-  { value: 'newest', label: 'Newest' },
-  { value: 'alphabetically', label: 'Alphabetically' },
-  { value: 'cheapest', label: 'Cheapest' },
+const titles = [
+  { category: Category.Phones, title: 'Mobile phone' },
+  { category: Category.Tablets, title: 'Tablets' },
+  { category: Category.Accessories, title: 'Accessories' },
 ];
-// const optionsItemsOnPage = [
-//   { value: '4', label: '4' },
-//   { value: '8', label: '8' },
-//   { value: '16', label: '16' },
-//   { value: 'all', label: 'All' },
-// ];
+
+const optionsSortBy = [
+  { value: 'newest', label: 'Newest', param: 'age' },
+  { value: 'alphabetically', label: 'Alphabetically', param: 'name' },
+  { value: 'cheapest', label: 'Cheapest', param: 'price' },
+];
+
+const optionsItemsOnPage = [
+  { value: '4', label: '4', param: 'perPage' },
+  { value: '8', label: '8', param: 'perPage' },
+  { value: '16', label: '16', param: 'perPage' },
+  { value: 'all', label: 'All', param: 'perPage' },
+];
 
 type Props = {
   category: Category;
@@ -33,38 +44,25 @@ export const CategoryPage: React.FC<Props> = ({ category }) => {
   const { phones, tablets, accessories, isLoading } =
     useContext(ProductContext);
 
-  const [selectedSortBy, setselectedSortBy] = useState<SelectOption>(
-    optionsSortBy[0],
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleChangeSortBy = (selected: SingleValue<SelectOption> | null) => {
-    if (selected) {
-      setselectedSortBy(selected);
+  useEffect(() => {
+    if (!searchParams.has('sort')) {
+      setSearchParams({ sort: optionsSortBy[0].param });
     }
-  };
+  }, [searchParams, setSearchParams]);
 
-  // const sortProducts = (products: Product[], sortBy: string) => {
-  //   const productsCopy = [...products];
+  const sortBy = searchParams.get('sort') || optionsSortBy[0].param;
+  const selectedOption =
+    optionsSortBy.find(option => option.param === sortBy) || optionsSortBy[0];
 
-  //   switch (sortBy) {
-  //     case 'newest':
-  //       return productsCopy.sort((a, b) => a.year - b.year);
-  //     case 'alphabetically':
-  //       return productsCopy.sort((a, b) => a.name.localeCompare(b.name));
-  //     case 'cheapest':
-  //       return productsCopy.sort((a, b) => a.price - b.price);
-  //     default:
-  //       return productsCopy;
-  //   }
-  // };
+  const itemsPerPage = searchParams.get('perPage') || 'all';
+  const selectedItems =
+    optionsItemsOnPage.find(option => option.value === itemsPerPage) ||
+    optionsItemsOnPage[3];
+  const currentPage = +(searchParams.get('page') || '1');
 
-  const getTitle = (categoryName: Category) => {
-    if (categoryName === Category.Phones) {
-      return 'Mobile phones';
-    }
-
-    return categoryName;
-  };
+  const categoryTitle = titles.find(item => item.category === category);
 
   let productCategory: Product[] = [];
 
@@ -82,20 +80,57 @@ export const CategoryPage: React.FC<Props> = ({ category }) => {
       break;
   }
 
-  // useEffect(() => {
-  //   const sorted = sortProducts(productCategory, selectedSortBy.value);
-  // }, [productCategory, selectedSortBy]);
+  const handleChangeSortBy = (selected: SingleValue<SelectOption> | null) => {
+    if (selected) {
+      const newParams = new URLSearchParams(searchParams);
+
+      newParams.set('sort', selected.param);
+      setSearchParams(newParams);
+    }
+  };
+
+  const handleChangeItemOnPage = (
+    selected: SingleValue<SelectOption> | null,
+  ) => {
+    if (selected) {
+      const newParams = new URLSearchParams(searchParams);
+
+      newParams.set('perPage', selected.value);
+      newParams.set('page', '1');
+
+      setSearchParams(newParams);
+    }
+  };
+
+  const handlePageChange = (page: number) => {
+    const newParams = new URLSearchParams(searchParams);
+
+    newParams.set('page', page.toString());
+    setSearchParams(newParams);
+  };
+
+  const sortedProducts = sortProducts(productCategory, sortBy);
+
+  const numberItemsPerPage =
+    itemsPerPage === 'all' ? sortedProducts.length : +itemsPerPage;
+  const startIndex = (currentPage - 1) * numberItemsPerPage;
+  const endIndex = startIndex + numberItemsPerPage;
+  const visibleProducts = sortedProducts.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(sortedProducts.length / numberItemsPerPage);
 
   return (
     <div className={styles.category}>
       {isLoading && <Loader />}
+
       {!isLoading && productCategory.length > 0 && (
         <>
           <nav className={styles.nav}>
             <a href="#" className={styles.navHome}></a>
             <span className={styles.navCategory}>{category}</span>
           </nav>
-          <h1 className={styles.title}>{getTitle(category)}</h1>
+          {categoryTitle && (
+            <h1 className={styles.title}>{categoryTitle.title}</h1>
+          )}
           <p
             className={styles.quantity}
           >{`${productCategory.length} models`}</p>
@@ -105,26 +140,36 @@ export const CategoryPage: React.FC<Props> = ({ category }) => {
               <div className={styles.selectSortBy}>
                 <CustomSelect
                   options={optionsSortBy}
-                  value={selectedSortBy}
+                  value={selectedOption}
                   onChange={handleChangeSortBy}
                 />
               </div>
             </div>
             <div>
               <p className={styles.sortTitle}>Items on page</p>
-              {/* <div className={styles.selectItemOnPage}>
+              <div className={styles.selectItemOnPage}>
                 <CustomSelect
                   options={optionsItemsOnPage}
-                  defaultValue={optionsItemsOnPage[0]}
+                  value={selectedItems}
+                  onChange={handleChangeItemOnPage}
                 />
-              </div> */}
+              </div>
             </div>
           </div>
           <main className={styles.container}>
-            {productCategory.map(product => (
+            {visibleProducts.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
           </main>
+          {itemsPerPage !== 'all' && (
+            <div className={styles.pagination}>
+              <Pagination
+                total={totalPages}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          )}
         </>
       )}
     </div>

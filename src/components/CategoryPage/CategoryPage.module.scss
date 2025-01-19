@@ -7,7 +7,6 @@
 
 .title {
   padding: 24px 0 8px;
-  text-transform: capitalize;
   font-size: 32px;
   font-weight: 800;
   line-height: 41px;
@@ -109,4 +108,9 @@
     width: 16px;
     height: 16px;
   }
+}
+
+.pagination {
+  width: 296px;
+  margin: 0 auto;
 }

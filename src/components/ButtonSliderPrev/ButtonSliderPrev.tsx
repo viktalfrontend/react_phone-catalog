@@ -1,19 +1,17 @@
-import styles from './ButtonSliderPrev.module.scss';
 import React from 'react';
-
-import classNames from 'classnames';
-import { Swiper } from 'swiper';
+import { Swiper as SwiperType } from 'swiper';
+import { Button } from '../Button/Button';
 
 type Props = {
   isBeginning: boolean;
-  swiperRef: React.RefObject<Swiper>;
-  isLarge?: boolean;
+  swiperRef: React.RefObject<SwiperType>;
+  isLarge: boolean;
 };
 
 export const ButtonSliderPrev: React.FC<Props> = ({
   isBeginning,
   swiperRef,
-  isLarge = false,
+  isLarge,
 }) => {
   const handlePrevClick = () => {
     if (swiperRef.current) {
@@ -22,12 +20,11 @@ export const ButtonSliderPrev: React.FC<Props> = ({
   };
 
   return (
-    <button
-      className={classNames(styles.button, styles.prev, {
-        [styles.disabled]: isBeginning,
-        [styles.large]: isLarge,
-      })}
+    <Button
       onClick={handlePrevClick}
-    ></button>
+      isDisabled={isBeginning}
+      direction="prev"
+      isLarge={isLarge}
+    />
   );
 };

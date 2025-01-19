@@ -16,8 +16,17 @@
   cursor: pointer;
 }
 
+.next {
+  background-image: url(../../images/arrows/arrow-right.svg);
+}
+
 .prev {
   background-image: url(../../images/arrows/arrow-left.svg);
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .large {
@@ -28,9 +37,4 @@
     height: auto;
     padding: 0 16px;
   }
-}
-
-.disabled {
-  opacity: 0.5;
-  pointer-events: none;
 }

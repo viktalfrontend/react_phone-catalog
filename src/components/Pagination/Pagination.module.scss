@@ -1,0 +1,46 @@
+@import '../../vars';
+@import'../../mixins';
+
+.container {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 64px;
+
+  @include on-desctop {
+   padding-bottom: 80px;
+  }
+}
+
+.pagination {
+  overflow: hidden;
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}
+
+.pageLlink {
+  text-decoration: none;
+  display: flex;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #313237;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #E2E6E9;
+}
+.pageLlink.active {
+  background: #000;
+  color:#fff;
+}
+
+.dots {
+  display: block;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  color: #313237;
+
+  border: 1px solid #E2E6E9;
+}
