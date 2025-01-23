@@ -1,18 +1,20 @@
 import React from 'react';
 import styles from './ProductCard.module.scss';
 import { Product } from '../../types/Product';
+import { Link } from 'react-router-dom';
 
 type Props = {
   product: Product;
 };
 
 export const ProductCard: React.FC<Props> = ({
-  product: { name, price, fullPrice, screen, capacity, ram, image },
+  product: { itemId, name, price, fullPrice, screen, capacity, ram, image },
 }) => (
   <div className={styles.productCard}>
-    <img className={styles.photo} src={image} alt={name} />
-    <p className={styles.title}>{name}</p>
-
+    <Link to={`${itemId}`}>
+      <img className={styles.photo} src={image} alt={name} />
+      <p className={styles.title}>{name}</p>
+    </Link>
     <div className={styles.prices}>
       <p>{`$${price}`}</p>
       <p className={styles.pricesFull}>{`$${fullPrice}`}</p>

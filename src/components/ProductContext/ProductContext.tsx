@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Product } from '../../types/Product';
 import { getProducts } from '../../services/fetch';
 import { Category } from '../../types/Category';
@@ -7,14 +7,18 @@ interface ProductsContextType {
   phones: Product[];
   tablets: Product[];
   accessories: Product[];
-  isLoading: boolean;
+  loading: boolean;
+  errorMessadge: string;
+  reload: () => void;
 }
 
 export const ProductContext = React.createContext<ProductsContextType>({
   phones: [],
   tablets: [],
   accessories: [],
-  isLoading: false,
+  loading: false,
+  errorMessadge: '',
+  reload: () => {},
 });
 
 type Props = {
@@ -23,15 +27,24 @@ type Props = {
 
 export const ProductProvider: React.FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessadge, setErrorMessadge] = useState('');
+  const [updateAt, setUpdateAt] = useState(new Date());
 
   useEffect(() => {
-    setIsLoading(true);
+    setLoading(true);
 
-    getProducts()
-      .then(setProducts)
-      .catch()
-      .finally(() => setIsLoading(false));
+    setTimeout(() => {
+      getProducts()
+        .then(setProducts)
+        .catch(() => setErrorMessadge('Something went wrong'))
+        .finally(() => setLoading(false));
+    }, 1000);
+  }, [updateAt]);
+
+  const reload = useCallback(() => {
+    setUpdateAt(new Date());
+    setErrorMessadge('');
   }, []);
 
   const phones = products.filter(
@@ -49,9 +62,11 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
       phones,
       tablets,
       accessories,
-      isLoading,
+      loading,
+      errorMessadge,
+      reload,
     }),
-    [phones, tablets, accessories, isLoading],
+    [phones, tablets, accessories, loading, errorMessadge, reload],
   );
 
   return (

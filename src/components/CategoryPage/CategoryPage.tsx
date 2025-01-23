@@ -1,5 +1,5 @@
-import { useSearchParams } from 'react-router-dom';
-import React, { useContext, useEffect } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
 import styles from './CategoryPage.module.scss';
 import { sortProducts } from '../../services/getSortFunction';
 import { ProductCard } from '../ProductCard';
@@ -36,15 +36,11 @@ const optionsItemsOnPage = [
   { value: 'all', label: 'All', param: 'perPage' },
 ];
 
-type Props = {
-  category: Category;
-};
-
-export const CategoryPage: React.FC<Props> = ({ category }) => {
-  const { phones, tablets, accessories, isLoading } =
+export const CategoryPage = () => {
+  const { phones, tablets, accessories, loading, errorMessadge, reload } =
     useContext(ProductContext);
-
   const [searchParams, setSearchParams] = useSearchParams();
+  const { category } = useParams();
 
   useEffect(() => {
     if (!searchParams.has('sort')) {
@@ -120,9 +116,9 @@ export const CategoryPage: React.FC<Props> = ({ category }) => {
 
   return (
     <div className={styles.category}>
-      {isLoading && <Loader />}
+      {loading && <Loader />}
 
-      {!isLoading && productCategory.length > 0 && (
+      {!loading && productCategory.length > 0 && (
         <>
           <nav className={styles.nav}>
             <a href="#" className={styles.navHome}></a>
@@ -170,6 +166,17 @@ export const CategoryPage: React.FC<Props> = ({ category }) => {
               />
             </div>
           )}
+        </>
+      )}
+
+      {!loading && !errorMessadge && productCategory.length === 0 && (
+        <p>There are no {category} yet</p>
+      )}
+
+      {errorMessadge && (
+        <>
+          <p>{errorMessadge}</p>
+          <button onClick={reload}>reload</button>
         </>
       )}
     </div>

@@ -16,17 +16,16 @@ import { ProductContext } from '../../components/ProductContext/ProductContext';
 const sliderTitle = [' Brand new models', ' Hot prices'];
 
 export const HomePage = () => {
-  const { phones, tablets, accessories, isLoading } =
-    useContext(ProductContext);
+  const { phones, tablets, accessories, loading } = useContext(ProductContext);
 
   const hotPrices = getHotPrices(phones);
   const newModels = getNewestModels(phones);
 
   return (
     <>
-      {isLoading && <Loader />}
+      {loading && <Loader />}
 
-      {!isLoading && phones.length > 0 && (
+      {!loading && phones.length > 0 && (
         <div>
           <h1 className={styles.hpTitle}>Welcome to Nice Gadgets store!</h1>
           <div className={styles.content}>
