@@ -5,6 +5,7 @@ export declare const info: string;
 export declare const infoItem: string;
 export declare const infoLable: string;
 export declare const infoValue: string;
+export declare const link: string;
 export declare const photo: string;
 export declare const prices: string;
 export declare const pricesFull: string;

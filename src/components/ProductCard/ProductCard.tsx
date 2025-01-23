@@ -11,7 +11,7 @@ export const ProductCard: React.FC<Props> = ({
   product: { itemId, name, price, fullPrice, screen, capacity, ram, image },
 }) => (
   <div className={styles.productCard}>
-    <Link to={`${itemId}`}>
+    <Link className={styles.link} to={`${itemId}`}>
       <img className={styles.photo} src={image} alt={name} />
       <p className={styles.title}>{name}</p>
     </Link>
