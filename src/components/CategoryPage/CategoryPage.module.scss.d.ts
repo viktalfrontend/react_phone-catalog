@@ -1,8 +1,5 @@
 export declare const category: string;
 export declare const container: string;
-export declare const nav: string;
-export declare const navCategory: string;
-export declare const navHome: string;
 export declare const pagination: string;
 export declare const quantity: string;
 export declare const selectItemOnPage: string;

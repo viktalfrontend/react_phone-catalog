@@ -78,37 +78,37 @@
   }
 }
 
-.nav {
-  padding-top: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+// .nav {
+//   padding-top: 24px;
+//   display: flex;
+//   align-items: center;
+//   gap: 8px;
+// }
 
-.navHome {
-  background-image: url(../../images/icons/home.svg);
-  content: '';
-  width: 16px;
-  height: 16px;
-}
+// .navHome {
+//   background-image: url(../../images/icons/home.svg);
+//   content: '';
+//   width: 16px;
+//   height: 16px;
+// }
 
-.navCategory {
-  display: flex;
-  text-transform: capitalize;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 15.34px;
-  color: $primary-color;
+// .navCategory {
+//   display: flex;
+//   text-transform: capitalize;
+//   gap: 8px;
+//   font-size: 12px;
+//   font-weight: 600;
+//   line-height: 15.34px;
+//   color: $primary-color;
 
-  &::before {
-    display: block;
-    background-image: url(../../images/arrows/arrow-right.svg);
-    content: '';
-    width: 16px;
-    height: 16px;
-  }
-}
+//   &::before {
+//     display: block;
+//     background-image: url(../../images/arrows/arrow-right.svg);
+//     content: '';
+//     width: 16px;
+//     height: 16px;
+//   }
+// }
 
 .pagination {
   width: 296px;

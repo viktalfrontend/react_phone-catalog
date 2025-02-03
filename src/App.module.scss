@@ -9,14 +9,14 @@
 @font-face {
   font-family: Mont;
   src: url(/fonts/Mont-Regular.otf);
-  font-weight:600 ;
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: Mont;
   src: url(/fonts/Mont-SemiBold.otf);
-  font-weight:700 ;
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -42,7 +42,3 @@ body {
   clip: rect(0,0,0,0) !important;
   white-space: nowrap !important;
 }
-
-// .content {
-//   display: block;
-// }

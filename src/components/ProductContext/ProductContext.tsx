@@ -2,11 +2,13 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Product } from '../../types/Product';
 import { getProducts } from '../../services/fetch';
 import { Category } from '../../types/Category';
+import { getRandomProducts } from '../../services/getSuggestedProducts';
 
 interface ProductsContextType {
   phones: Product[];
   tablets: Product[];
   accessories: Product[];
+  suggestedProducts: Product[];
   loading: boolean;
   errorMessadge: string;
   reload: () => void;
@@ -18,6 +20,7 @@ export const ProductContext = React.createContext<ProductsContextType>({
   accessories: [],
   loading: false,
   errorMessadge: '',
+  suggestedProducts: [],
   reload: () => {},
 });
 
@@ -57,6 +60,8 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
     product => product.category === Category.Accessories,
   );
 
+  const suggestedProducts = getRandomProducts(products, 10);
+
   const value = useMemo(
     () => ({
       phones,
@@ -64,9 +69,18 @@ export const ProductProvider: React.FC<Props> = ({ children }) => {
       accessories,
       loading,
       errorMessadge,
+      suggestedProducts,
       reload,
     }),
-    [phones, tablets, accessories, loading, errorMessadge, reload],
+    [
+      phones,
+      tablets,
+      accessories,
+      loading,
+      errorMessadge,
+      suggestedProducts,
+      reload,
+    ],
   );
 
   return (

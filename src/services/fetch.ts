@@ -21,7 +21,7 @@ export const getProducts = (): Promise<Product[]> => {
 };
 
 export const getDetails = (productId: string, category: string) => {
-  return get<ProductDetails[]>(`/api/${category}.json`).then(
+  return get<ProductDetails[]>(`api/${category}.json`).then(
     (details: ProductDetails[]) => {
       return details.find((p: ProductDetails) => p.id === productId) || null;
     },

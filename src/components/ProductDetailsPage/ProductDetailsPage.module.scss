@@ -1,0 +1,239 @@
+@import '../../vars';
+@import '../../mixins';
+
+.container {
+  @include content-padding-inline;
+}
+
+.buttonBack {
+  margin: 24px 0 16px;
+  display: flex;
+  gap: 4px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 15.34px;
+  color: $primary-color;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  @include on-tablet {
+    margin-top: 40px;
+  }
+
+  &::before {
+    display: block;
+    background-image: url(../../images/arrows/arrow-left.svg);
+    content: '';
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 30.8px;
+  text-align: left;
+  color: $secondary-color;
+
+  @include on-tablet {
+    font-size: 32px;
+    line-height: 41px;
+  }
+}
+
+.section {
+  margin-bottom: 56px;
+}
+
+.titleRadioButton {
+  padding-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15.34px;
+  text-align: left;
+  color: $primary-color;
+}
+
+.wrapper {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #E2E6E9 ;
+}
+
+.colorOptions {
+  width: 32px;
+  height: 32px;
+  border-radius: 36px;
+  border: 2px solid $border-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.colorOptions.selected {
+  border-color: $secondary-color;
+}
+
+.radioInput {
+  display: none;
+}
+
+.inner {
+  display: block;
+  height: 30px;
+  width: 30px;
+  border: 2px solid #fff;
+  border-radius: 36px;
+}
+
+.capacityOptions {
+  border: 1px solid $button-color ;
+}
+
+
+.capacityButton {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: center;
+  padding: 8px;
+  border: 1px solid $button-color;
+  cursor: pointer;
+}
+
+.capacityButton.selected {
+  color: #fff;
+  background-color: $secondary-color;
+  border: none;
+}
+
+.prices {
+  padding-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 41px;
+  text-align: left;
+  color: $secondary-color ;
+}
+
+.priceDiscount {
+  color: $primary-color;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 28.12px;
+  text-decoration: line-through;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.buttonAdd {
+  border: none;
+  flex-grow: 1;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: center;
+  color: #fff;
+  background-color: $secondary-color;
+
+}
+
+.buttonAdd:hover {
+  box-shadow: 0 3px 13px 0 #17203166;
+  cursor: pointer;
+}
+
+.buttonFavorite {
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #b4bdc3;
+  background-color: #fff;
+  background-image: url(../../images/icons/favourites.svg);
+
+  &:hover {
+    border: 1px solid $secondary-color;
+    cursor: pointer;
+  }
+}
+
+.sectionTitle {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e6e9;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25.56px;
+  text-align: left;
+  color: $secondary-color;
+
+  @include on-tablet {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 30.8px;
+    text-align: left;
+  }
+}
+
+.titleDescription {
+  padding: 32px 0 16px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20.45px;
+  text-align: left;
+  color: $secondary-color;
+
+  @include on-tablet {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 25.56px;
+  }
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-align: left;
+  color: $primary-color;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.specs {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+.specsShort {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15.34px;
+}
+
+.itemName {
+  color: $primary-color;
+  text-transform: capitalize;
+}
+
+.itemInfo {
+  color: $secondary-color;
+}

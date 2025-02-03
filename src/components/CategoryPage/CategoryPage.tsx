@@ -10,6 +10,7 @@ import { Product } from '../../types/Product';
 import { CustomSelect } from '../CustomSelect/CuctomSelect';
 import { SingleValue } from 'react-select';
 import { Pagination } from '../Pagination/Pagination';
+import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 
 type SelectOption = {
   value: string;
@@ -120,10 +121,8 @@ export const CategoryPage = () => {
 
       {!loading && productCategory.length > 0 && (
         <>
-          <nav className={styles.nav}>
-            <a href="#" className={styles.navHome}></a>
-            <span className={styles.navCategory}>{category}</span>
-          </nav>
+          <Breadcrumbs category={category || ''} />
+
           {categoryTitle && (
             <h1 className={styles.title}>{categoryTitle.title}</h1>
           )}
