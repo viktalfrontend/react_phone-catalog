@@ -9,6 +9,16 @@ import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 import { ProductsSlider } from '../ProductsSlider';
 import { ProductContext } from '../ProductContext/ProductContext';
 
+const generateProductId = (
+  namespaceId: string,
+  capacity: string,
+  color: string,
+) => {
+  const normalized = color.toLowerCase().replace(/\s+/g, '-');
+
+  return `${namespaceId}-${capacity.toLowerCase()}-${normalized}`;
+};
+
 export const ProductDetailsPage = () => {
   const [productDetails, setProductDatails] = useState<ProductDetails | null>(
     null,
@@ -43,7 +53,7 @@ export const ProductDetailsPage = () => {
         }
 
         setProductDatails(details);
-        setSelectedColor(details.color);
+        setSelectedColor(details.color.replace(/\s+/g, '-'));
         setSelectedCapacity(details.capacity);
       })
       .catch(() => {})
@@ -60,12 +70,70 @@ export const ProductDetailsPage = () => {
     cell: productDetails?.cell.slice(0, 3).join(', '),
   };
 
+  const colors: Record<string, string> = {
+    black: '#000000',
+    gold: '#FFD700',
+    yellow: '#FFFF00',
+    green: '#008000',
+    midnightgreen: '#004953',
+    silver: '#C0C0C0',
+    spacegray: '#4A4A4A',
+    red: '#FF0000',
+    white: '#FFFFFF',
+    purple: '#800080',
+    coral: '#FF7F50',
+    rosegold: '#B76E79',
+    midnight: '#003366',
+    spaceblack: '#1d1d1f',
+    blue: '#0000FF',
+    pink: '#FFC0CB',
+    sierrablue: '#A1B6D4',
+    graphite: '#3C3C3C',
+    skyblue: '#87CEEB',
+    starlight: '#F2E1C1',
+  };
+
+  const handleColorChange = (color: string) => {
+    if (!productDetails || !selectedCapacity) {
+      return;
+    }
+
+    setSelectedColor(color);
+
+    const newId = generateProductId(
+      productDetails.namespaceId,
+      selectedCapacity,
+      color,
+    );
+
+    navigate(`/${category}/${newId}`);
+  };
+
+  const handleCapacityChange = (capacity: string) => {
+    if (!productDetails || !selectedCapacity) {
+      return;
+    }
+
+    setSelectedCapacity(capacity);
+
+    const newId = generateProductId(
+      productDetails.namespaceId,
+      capacity,
+      selectedColor || '',
+    );
+
+    navigate(`/${category}/${newId}`);
+  };
+
   return (
     <div>
       {isLoading && <Loader />}
       {!isLoading && productDetails && (
         <div className={styles.container}>
-          <Breadcrumbs category={category || ''} productId={productId || ''} />
+          <Breadcrumbs
+            category={category || ''}
+            productName={productDetails.name || ''}
+          />
 
           <button className={styles.buttonBack} onClick={handleGoBack}>
             Back
@@ -76,29 +144,34 @@ export const ProductDetailsPage = () => {
           <section className={styles.section}>
             <h3 className={styles.titleRadioButton}>Available colors</h3>
             <div className={styles.wrapper}>
-              {productDetails.colorsAvailable.map(color => (
-                // eslint-disable-next-line jsx-a11y/label-has-associated-control
-                <label
-                  key={color}
-                  htmlFor={`color-${color}`}
-                  className={cn(styles.colorOptions, {
-                    [styles.selected]: selectedColor === color,
-                  })}
-                >
-                  <input
-                    id={`color-${color}`}
-                    type="radio"
-                    name="color"
-                    value={color}
-                    onChange={() => setSelectedColor(color)}
-                    className={styles.radioInput}
-                  />
-                  <div
-                    className={styles.inner}
-                    style={{ backgroundColor: color }}
-                  ></div>
-                </label>
-              ))}
+              {productDetails.colorsAvailable.map(color => {
+                const normalizedColor = color.replace(/\s+/g, '-');
+                const formattedColor = color.replace(/\s+/g, '');
+
+                return (
+                  // eslint-disable-next-line jsx-a11y/label-has-associated-control
+                  <label
+                    key={formattedColor}
+                    htmlFor={`color-${formattedColor}`}
+                    className={cn(styles.colorOptions, {
+                      [styles.selected]: selectedColor === normalizedColor,
+                    })}
+                  >
+                    <input
+                      id={`color-${formattedColor}`}
+                      type="radio"
+                      name="color"
+                      value={formattedColor}
+                      onChange={() => handleColorChange(normalizedColor)}
+                      className={styles.radioInput}
+                    />
+                    <div
+                      className={styles.inner}
+                      style={{ backgroundColor: colors[formattedColor] }}
+                    ></div>
+                  </label>
+                );
+              })}
             </div>
           </section>
           <section className={styles.section}>
@@ -112,7 +185,7 @@ export const ProductDetailsPage = () => {
                     type="radio"
                     name="capacity"
                     value={capacity}
-                    onChange={() => setSelectedCapacity(capacity)}
+                    onChange={() => handleCapacityChange(capacity)}
                     className={styles.radioInput}
                   />
                   <div

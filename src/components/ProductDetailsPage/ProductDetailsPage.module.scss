@@ -85,9 +85,9 @@
 
 .inner {
   display: block;
-  height: 30px;
-  width: 30px;
-  border: 2px solid #fff;
+  height: 26px;
+  width: 26px;
+  border: 1px solid $border-color;
   border-radius: 36px;
 }
 
@@ -223,6 +223,7 @@
   font-weight: 500;
   line-height: 21px;
 }
+
 .specsShort {
   font-size: 12px;
   font-weight: 600;

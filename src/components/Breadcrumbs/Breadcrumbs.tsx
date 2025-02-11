@@ -5,10 +5,10 @@ import cn from 'classnames';
 
 type Props = {
   category: string;
-  productId?: string;
+  productName?: string;
 };
 
-export const Breadcrumbs: React.FC<Props> = ({ category, productId }) => {
+export const Breadcrumbs: React.FC<Props> = ({ category, productName }) => {
   return (
     <nav className={styles.nav}>
       <Link to="/">
@@ -18,16 +18,16 @@ export const Breadcrumbs: React.FC<Props> = ({ category, productId }) => {
       <Link className={styles.link} to={`/${category}`}>
         <span
           className={cn(styles.navCategory, {
-            [styles.isActive]: productId,
+            [styles.isActive]: productName,
           })}
         >
           {category}
         </span>
       </Link>
       <div className={styles.arrow}></div>
-      {productId && (
+      {productName && (
         <span className={`${styles.navCategory} ${styles.product}`}>
-          {productId}
+          {productName}
         </span>
       )}
     </nav>
