@@ -32,6 +32,7 @@
 }
 
 .title {
+  padding-bottom: 32px;
   font-size: 22px;
   font-weight: 800;
   line-height: 30.8px;
@@ -39,13 +40,70 @@
   color: $secondary-color;
 
   @include on-tablet {
+    padding-bottom: 40px;
     font-size: 32px;
     line-height: 41px;
   }
 }
 
-.section {
-  margin-bottom: 56px;
+.content {
+  @include page-grid;
+  row-gap: 56px;
+
+  @include on-tablet {
+    row-gap: 64px;
+  }
+
+  @include on-desctop {
+    row-gap: 80px;
+  }
+
+  > *:nth-child(2) {
+    margin-top: -16px;
+
+    @include on-tablet {
+      margin-top: 0;
+    }
+  }
+}
+
+.productDetailsSliderWrapper {
+  grid-column: 1 / -1;
+
+  @include on-tablet {
+    grid-column: span 8;
+  }
+
+  @include on-desctop {
+    grid-column: span 12;
+  }
+}
+
+.options {
+  grid-column: span 4;
+
+  @include on-desctop {
+    grid-column: 14 / 21;
+  }
+}
+
+.description {
+  grid-column: 1/-1;
+
+  @include on-desctop {
+    grid-column: span 12;
+  }
+}
+.descriptionTech {
+  grid-column: 1/-1;
+
+  @include on-desctop {
+    grid-column: 14 / -1;
+  }
+}
+
+.produtcOption:not(:last-child) {
+  padding-bottom: 24px;
 }
 
 .titleRadioButton {
@@ -61,7 +119,7 @@
   display: flex;
   gap: 8px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #E2E6E9 ;
+  border-bottom: 1px solid #e2e6e9;
 }
 
 .colorOptions {
@@ -92,9 +150,8 @@
 }
 
 .capacityOptions {
-  border: 1px solid $button-color ;
+  border: 1px solid $button-color;
 }
-
 
 .capacityButton {
   font-size: 14px;
@@ -121,7 +178,7 @@
   font-weight: 800;
   line-height: 41px;
   text-align: left;
-  color: $secondary-color ;
+  color: $secondary-color;
 }
 
 .priceDiscount {
@@ -146,7 +203,6 @@
   text-align: center;
   color: #fff;
   background-color: $secondary-color;
-
 }
 
 .buttonAdd:hover {
@@ -169,7 +225,7 @@
   }
 }
 
-.sectionTitle {
+.blockTitle {
   padding-bottom: 16px;
   border-bottom: 1px solid #e2e6e9;
   font-size: 20px;
@@ -237,4 +293,75 @@
 
 .itemInfo {
   color: $secondary-color;
+}
+
+.productDetailsSlider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+
+  @include on-tablet {
+    flex-direction: row-reverse;
+  }
+}
+
+.swiper {
+  width: 288px;
+  height: 288px;
+
+  @include on-tablet {
+    width: 464px;
+    height: 464px;
+  }
+}
+
+.slide {
+  display: flex;
+  justify-content: center;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+
+  @include on-tablet {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  @include on-desctop {
+    gap: 16px;
+  }
+}
+
+.dot {
+  width: 51.2px;
+  height: 49px;
+  padding: 4px;
+  object-fit: contain;
+  border: 1px solid $border-color;
+
+  @include on-tablet {
+    width: 35px;
+    height: 35px;
+  }
+
+  @include on-desctop {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.dot:hover {
+  cursor: pointer;
+}
+
+.activeDot {
+  border: 1px solid $primary-color;
+}
+
+.sliderBlock {
+  padding: 56px 0 56px;
 }

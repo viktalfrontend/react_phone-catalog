@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductDetails } from '../../types/ProductDatails';
 import { Loader } from '../Loader';
@@ -8,6 +8,11 @@ import styles from './ProductDetailsPage.module.scss';
 import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 import { ProductsSlider } from '../ProductsSlider';
 import { ProductContext } from '../ProductContext/ProductContext';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperType } from 'swiper';
+import classNames from 'classnames';
+import { getProductsByCategory } from '../../services/getProductsByCategory';
+import { getRandomProducts } from '../../services/getSuggestedProducts';
 
 const generateProductId = (
   namespaceId: string,
@@ -26,7 +31,9 @@ export const ProductDetailsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedCapacity, setSelectedCapacity] = useState<string | null>(null);
-  const { suggestedProducts } = useContext(ProductContext);
+  const { phones, tablets, accessories } = useContext(ProductContext);
+  const swiperRef = useRef<SwiperType | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const { productId, category } = useParams<{
     productId: string;
@@ -36,6 +43,14 @@ export const ProductDetailsPage = () => {
 
   const handleGoBack = () => {
     navigate(-1);
+  };
+
+  const handleDotClick = (index: number) => {
+    swiperRef.current?.slideTo(index);
+  };
+
+  const updateNavigationState = (swiper: SwiperType) => {
+    setActiveIndex(swiper.realIndex);
   };
 
   useEffect(() => {
@@ -125,6 +140,16 @@ export const ProductDetailsPage = () => {
     navigate(`/${category}/${newId}`);
   };
 
+  const productCategory = getProductsByCategory(category, {
+    phones,
+    tablets,
+    accessories,
+  });
+
+  const suggestedProducts = getRandomProducts(productCategory, 10).filter(
+    product => String(product.id) !== productId,
+  );
+
   return (
     <div>
       {isLoading && <Loader />}
@@ -140,81 +165,139 @@ export const ProductDetailsPage = () => {
           </button>
 
           <h2 className={styles.title}>{productDetails.name}</h2>
-          <div className="images"></div>
-          <section className={styles.section}>
-            <h3 className={styles.titleRadioButton}>Available colors</h3>
-            <div className={styles.wrapper}>
-              {productDetails.colorsAvailable.map(color => {
-                const normalizedColor = color.replace(/\s+/g, '-');
-                const formattedColor = color.replace(/\s+/g, '');
-
-                return (
-                  // eslint-disable-next-line jsx-a11y/label-has-associated-control
-                  <label
-                    key={formattedColor}
-                    htmlFor={`color-${formattedColor}`}
-                    className={cn(styles.colorOptions, {
-                      [styles.selected]: selectedColor === normalizedColor,
+          <div className={styles.content}>
+            <div
+              className={`${styles.productDetailsSlider} ${styles.productDetailsSliderWrapper}`}
+            >
+              <Swiper
+                className={styles.swiper}
+                onSwiper={swiper => {
+                  swiperRef.current = swiper;
+                  updateNavigationState(swiper);
+                }}
+                onSlideChange={swiper => updateNavigationState(swiper)}
+              >
+                {productDetails.images.map((slider, index) => (
+                  <SwiperSlide key={index} className={styles.slide}>
+                    <img src={slider} alt={`slide-${index + 1}`} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              <div className={styles.dots}>
+                {productDetails.images.map((dot, index) => (
+                  <img
+                    key={index}
+                    src={dot}
+                    alt={`dot-${index + 1}`}
+                    className={classNames(styles.dot, {
+                      [styles.activeDot]: activeIndex === index,
                     })}
-                  >
-                    <input
-                      id={`color-${formattedColor}`}
-                      type="radio"
-                      name="color"
-                      value={formattedColor}
-                      onChange={() => handleColorChange(normalizedColor)}
-                      className={styles.radioInput}
-                    />
-                    <div
-                      className={styles.inner}
-                      style={{ backgroundColor: colors[formattedColor] }}
-                    ></div>
-                  </label>
-                );
-              })}
-            </div>
-          </section>
-          <section className={styles.section}>
-            <h3 className={styles.titleRadioButton}>Select capacity</h3>
-            <div className={styles.wrapper}>
-              {productDetails.capacityAvailable.map(capacity => (
-                // eslint-disable-next-line jsx-a11y/label-has-associated-control
-                <label key={capacity} htmlFor={`capacity-${capacity}`}>
-                  <input
-                    id={`capacity-${capacity}`}
-                    type="radio"
-                    name="capacity"
-                    value={capacity}
-                    onChange={() => handleCapacityChange(capacity)}
-                    className={styles.radioInput}
+                    onClick={() => handleDotClick(index)}
                   />
-                  <div
-                    className={cn(styles.capacityButton, {
-                      [styles.selected]: selectedCapacity === capacity,
-                    })}
-                  >
-                    {capacity}
-                  </div>
-                </label>
-              ))}
+                ))}
+              </div>
             </div>
-          </section>
 
-          <section className={styles.section}>
-            <div className={styles.prices}>
-              <p>{`$${productDetails.priceRegular}`}</p>
-              <p
-                className={styles.priceDiscount}
-              >{`$${productDetails.priceDiscount}`}</p>
-            </div>
-            <div className={styles.buttons}>
-              <button className={styles.buttonAdd}>Add to cart</button>
-              <button className={styles.buttonFavorite}></button>
-            </div>
-            <div className={`${styles.specs} ${styles.specsShort}`}>
-              {Object.entries(specs)
-                .slice(0, 4)
-                .map(
+            <section className={styles.options}>
+              <div className={styles.produtcOption}>
+                <h3 className={styles.titleRadioButton}>Available colors</h3>
+                <div className={styles.wrapper}>
+                  {productDetails.colorsAvailable.map(color => {
+                    const normalizedColor = color.replace(/\s+/g, '-');
+                    const formattedColor = color.replace(/\s+/g, '');
+
+                    return (
+                      // eslint-disable-next-line jsx-a11y/label-has-associated-control
+                      <label
+                        key={formattedColor}
+                        htmlFor={`color-${formattedColor}`}
+                        className={cn(styles.colorOptions, {
+                          [styles.selected]: selectedColor === normalizedColor,
+                        })}
+                      >
+                        <input
+                          id={`color-${formattedColor}`}
+                          type="radio"
+                          name="color"
+                          value={formattedColor}
+                          onChange={() => handleColorChange(normalizedColor)}
+                          className={styles.radioInput}
+                        />
+                        <div
+                          className={styles.inner}
+                          style={{ backgroundColor: colors[formattedColor] }}
+                        ></div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className={styles.produtcOption}>
+                <h3 className={styles.titleRadioButton}>Select capacity</h3>
+                <div className={styles.wrapper}>
+                  {productDetails.capacityAvailable.map(capacity => (
+                    // eslint-disable-next-line jsx-a11y/label-has-associated-control
+                    <label key={capacity} htmlFor={`capacity-${capacity}`}>
+                      <input
+                        id={`capacity-${capacity}`}
+                        type="radio"
+                        name="capacity"
+                        value={capacity}
+                        onChange={() => handleCapacityChange(capacity)}
+                        className={styles.radioInput}
+                      />
+                      <div
+                        className={cn(styles.capacityButton, {
+                          [styles.selected]: selectedCapacity === capacity,
+                        })}
+                      >
+                        {capacity}
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.produtcOption}>
+                <div className={styles.prices}>
+                  <p>{`$${productDetails.priceRegular}`}</p>
+                  <p
+                    className={styles.priceDiscount}
+                  >{`$${productDetails.priceDiscount}`}</p>
+                </div>
+                <div className={styles.buttons}>
+                  <button className={styles.buttonAdd}>Add to cart</button>
+                  <button className={styles.buttonFavorite}></button>
+                </div>
+                <div className={`${styles.specs} ${styles.specsShort}`}>
+                  {Object.entries(specs)
+                    .slice(0, 4)
+                    .map(
+                      ([key, value]) =>
+                        value && (
+                          <div className={styles.info} key={key}>
+                            <p className={styles.itemName}>{key}</p>
+                            <p className={styles.itemInfo}>{value}</p>
+                          </div>
+                        ),
+                    )}
+                </div>
+              </div>
+            </section>
+
+            <section className={styles.description}>
+              <h3 className={styles.blockTitle}>About</h3>
+              {productDetails.description.map(detail => (
+                <article key={detail.title}>
+                  <h4 className={styles.titleDescription}>{detail.title}</h4>
+                  <p className={styles.text}>{detail.text}</p>
+                </article>
+              ))}
+            </section>
+            <section className={styles.descriptionTech}>
+              <h3 className={styles.blockTitle}>Tech specs</h3>
+              <div className={styles.specs}>
+                {Object.entries(specs).map(
                   ([key, value]) =>
                     value && (
                       <div className={styles.info} key={key}>
@@ -223,38 +306,15 @@ export const ProductDetailsPage = () => {
                       </div>
                     ),
                 )}
-            </div>
-          </section>
-
-          <section className={styles.section}>
-            <h3 className={styles.sectionTitle}>About</h3>
-            {productDetails.description.map(detail => (
-              <article key={detail.title}>
-                <h4 className={styles.titleDescription}>{detail.title}</h4>
-                <p className={styles.text}>{detail.text}</p>
-              </article>
-            ))}
-          </section>
-          <section className={styles.section}>
-            <h3 className={styles.sectionTitle}>Tech specs</h3>
-            <div className={styles.specs}>
-              {Object.entries(specs).map(
-                ([key, value]) =>
-                  value && (
-                    <div className={styles.info} key={key}>
-                      <p className={styles.itemName}>{key}</p>
-                      <p className={styles.itemInfo}>{value}</p>
-                    </div>
-                  ),
-              )}
-            </div>
-          </section>
-          <section className={styles.section}>
+              </div>
+            </section>
+          </div>
+          <div className={styles.sliderBlock}>
             <ProductsSlider
               products={suggestedProducts}
               title={'You may also like'}
             />
-          </section>
+          </div>
         </div>
       )}
       {!isLoading && !productDetails && <p>Product was not found</p>}

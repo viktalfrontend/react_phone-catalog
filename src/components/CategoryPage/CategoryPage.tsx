@@ -6,11 +6,11 @@ import { ProductCard } from '../ProductCard';
 import { Category } from '../../types/Category';
 import { Loader } from '../Loader';
 import { ProductContext } from '../ProductContext/ProductContext';
-import { Product } from '../../types/Product';
 import { CustomSelect } from '../CustomSelect/CuctomSelect';
 import { SingleValue } from 'react-select';
 import { Pagination } from '../Pagination/Pagination';
 import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
+import { getProductsByCategory } from '../../services/getProductsByCategory';
 
 type SelectOption = {
   value: string;
@@ -61,21 +61,11 @@ export const CategoryPage = () => {
 
   const categoryTitle = titles.find(item => item.category === category);
 
-  let productCategory: Product[] = [];
-
-  switch (category) {
-    case Category.Phones:
-      productCategory = phones;
-      break;
-    case Category.Tablets:
-      productCategory = tablets;
-      break;
-    case Category.Accessories:
-      productCategory = accessories;
-      break;
-    default:
-      break;
-  }
+  const productCategory = getProductsByCategory(category, {
+    phones,
+    tablets,
+    accessories,
+  });
 
   const handleChangeSortBy = (selected: SingleValue<SelectOption> | null) => {
     if (selected) {

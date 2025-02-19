@@ -5,7 +5,7 @@ import { Button } from '../Button/Button';
 type Props = {
   isBeginning: boolean;
   swiperRef: React.RefObject<SwiperType>;
-  isLarge: boolean;
+  isLarge?: boolean;
 };
 
 export const ButtonSliderPrev: React.FC<Props> = ({

@@ -5,7 +5,7 @@ import { Button } from '../Button';
 type Props = {
   isEnd: boolean;
   swiperRef: React.RefObject<SwiperType>;
-  isLarge: boolean;
+  isLarge?: boolean;
 };
 
 export const ButtonSliderNext: React.FC<Props> = ({
